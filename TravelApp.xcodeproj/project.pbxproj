@@ -7,25 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37C7BEDBE223357B7E802C94 /* Pods_TravelApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA22F6F839F73932A43A28CF /* Pods_TravelApp.framework */; };
+		C0075FF12099C45C000F885F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0075FF02099C45C000F885F /* User.swift */; };
 		C013F7652092D36B001A9956 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C013F7642092D36B001A9956 /* AppDelegate.swift */; };
-		C013F7672092D36B001A9956 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C013F7662092D36B001A9956 /* ViewController.swift */; };
 		C013F76A2092D36B001A9956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C013F7682092D36B001A9956 /* Main.storyboard */; };
 		C013F76D2092D36B001A9956 /* TravelApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C013F76B2092D36B001A9956 /* TravelApp.xcdatamodeld */; };
 		C013F76F2092D36C001A9956 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C013F76E2092D36C001A9956 /* Assets.xcassets */; };
 		C013F7722092D36C001A9956 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C013F7702092D36C001A9956 /* LaunchScreen.storyboard */; };
 		C013F77B2092D383001A9956 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C013F77A2092D383001A9956 /* MapKit.framework */; };
+		C013F77E2092D7A7001A9956 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C013F77D2092D7A7001A9956 /* LoginViewController.swift */; };
+		C03C00DB209F13B000C56018 /* Hotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C00DA209F13B000C56018 /* Hotel.swift */; };
+		C03C00DD209F155B00C56018 /* HotelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C00DC209F155B00C56018 /* HotelData.swift */; };
+		C03C2C402095768F000C0774 /* AccountPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C2C3F2095768F000C0774 /* AccountPopoverViewController.swift */; };
+		C05F2E2120A2171200BC687D /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F2E2020A2171200BC687D /* ForecastTableViewCell.swift */; };
+		C064AD6D20A14737005C7489 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C064AD6C20A14737005C7489 /* RatingControl.swift */; };
+		C064AD6F20A149CE005C7489 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C064AD6E20A149CE005C7489 /* RatingViewController.swift */; };
+		C07190CD209B79A9005FECFC /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07190CC209B79A9005FECFC /* ForecastViewController.swift */; };
+		C07C44E820948491007F9AA4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C44E720948491007F9AA4 /* SignUpViewController.swift */; };
+		C07CC893209CF0740018E647 /* FirstTimeRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CC892209CF0740018E647 /* FirstTimeRun.swift */; };
+		C09DC1FF209342E6001C441D /* APIConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09DC1FE209342E6001C441D /* APIConnect.swift */; };
+		C0C0606B209A53E300EF8A69 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0606A209A53E300EF8A69 /* MainVC.swift */; };
+		C0C108E420A0B6F100D65D99 /* HotelDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C108E320A0B6F100D65D99 /* HotelDetailViewController.swift */; };
+		C0CBA13420A09F4F00CE8927 /* HotelDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CBA13320A09F4F00CE8927 /* HotelDetailTableViewCell.swift */; };
+		C0CBA13620A0A25E00CE8927 /* HotelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CBA13520A0A25E00CE8927 /* HotelTableViewController.swift */; };
+		C0D99B2120A194340028D0E7 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D99B2020A194340028D0E7 /* Constant.swift */; };
+		C0F38EFD20A1BE08007265C9 /* CitySelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F38EFC20A1BE08007265C9 /* CitySelectionTableViewController.swift */; };
+		C0FC23DF209EBD3A005633E4 /* SearchingHotelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FC23DE209EBD3A005633E4 /* SearchingHotelTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		20250D11481E05A5FC6D59C5 /* Pods-TravelApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelApp/Pods-TravelApp.debug.xcconfig"; sourceTree = "<group>"; };
+		65BEB6BBC901E94E539CF356 /* Pods-TravelApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelApp/Pods-TravelApp.release.xcconfig"; sourceTree = "<group>"; };
+		C0075FF02099C45C000F885F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C013F7612092D36B001A9956 /* TravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C013F7642092D36B001A9956 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C013F7662092D36B001A9956 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C013F7692092D36B001A9956 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C013F76C2092D36B001A9956 /* TravelApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TravelApp.xcdatamodel; sourceTree = "<group>"; };
 		C013F76E2092D36C001A9956 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C013F7712092D36C001A9956 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C013F7732092D36C001A9956 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C013F77A2092D383001A9956 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C013F77D2092D7A7001A9956 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C03C00DA209F13B000C56018 /* Hotel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotel.swift; sourceTree = "<group>"; };
+		C03C00DC209F155B00C56018 /* HotelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelData.swift; sourceTree = "<group>"; };
+		C03C2C3F2095768F000C0774 /* AccountPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPopoverViewController.swift; sourceTree = "<group>"; };
+		C05F2E2020A2171200BC687D /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
+		C064AD6C20A14737005C7489 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
+		C064AD6E20A149CE005C7489 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		C07190CC209B79A9005FECFC /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
+		C07C44E720948491007F9AA4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		C07CC892209CF0740018E647 /* FirstTimeRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeRun.swift; sourceTree = "<group>"; };
+		C09DC1FE209342E6001C441D /* APIConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConnect.swift; sourceTree = "<group>"; };
+		C0C0606A209A53E300EF8A69 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		C0C108E320A0B6F100D65D99 /* HotelDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelDetailViewController.swift; sourceTree = "<group>"; };
+		C0CBA13320A09F4F00CE8927 /* HotelDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelDetailTableViewCell.swift; sourceTree = "<group>"; };
+		C0CBA13520A0A25E00CE8927 /* HotelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelTableViewController.swift; sourceTree = "<group>"; };
+		C0D99B2020A194340028D0E7 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		C0F38EFC20A1BE08007265C9 /* CitySelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySelectionTableViewController.swift; sourceTree = "<group>"; };
+		C0FC23DE209EBD3A005633E4 /* SearchingHotelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingHotelTableViewCell.swift; sourceTree = "<group>"; };
+		EA22F6F839F73932A43A28CF /* Pods_TravelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,18 +74,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				C013F77B2092D383001A9956 /* MapKit.framework in Frameworks */,
+				37C7BEDBE223357B7E802C94 /* Pods_TravelApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B99ACF754B218A3A3733804 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				20250D11481E05A5FC6D59C5 /* Pods-TravelApp.debug.xcconfig */,
+				65BEB6BBC901E94E539CF356 /* Pods-TravelApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C0075FEF2099C450000F885F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0075FF02099C45C000F885F /* User.swift */,
+				C03C00DA209F13B000C56018 /* Hotel.swift */,
+				C03C00DC209F155B00C56018 /* HotelData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C013F7582092D36B001A9956 = {
 			isa = PBXGroup;
 			children = (
 				C013F7632092D36B001A9956 /* TravelApp */,
 				C013F7622092D36B001A9956 /* Products */,
 				C013F7792092D383001A9956 /* Frameworks */,
+				4B99ACF754B218A3A3733804 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +121,11 @@
 		C013F7632092D36B001A9956 /* TravelApp */ = {
 			isa = PBXGroup;
 			children = (
+				C0FC23DD209EBD26005633E4 /* View */,
+				C07CC891209CF0630018E647 /* Resources */,
+				C0075FEF2099C450000F885F /* Model */,
+				C013F77C2092D798001A9956 /* Controller */,
 				C013F7642092D36B001A9956 /* AppDelegate.swift */,
-				C013F7662092D36B001A9956 /* ViewController.swift */,
 				C013F7682092D36B001A9956 /* Main.storyboard */,
 				C013F76E2092D36C001A9956 /* Assets.xcassets */,
 				C013F7702092D36C001A9956 /* LaunchScreen.storyboard */,
@@ -75,8 +139,46 @@
 			isa = PBXGroup;
 			children = (
 				C013F77A2092D383001A9956 /* MapKit.framework */,
+				EA22F6F839F73932A43A28CF /* Pods_TravelApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C013F77C2092D798001A9956 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C013F77D2092D7A7001A9956 /* LoginViewController.swift */,
+				C07C44E720948491007F9AA4 /* SignUpViewController.swift */,
+				C03C2C3F2095768F000C0774 /* AccountPopoverViewController.swift */,
+				C0C0606A209A53E300EF8A69 /* MainVC.swift */,
+				C07190CC209B79A9005FECFC /* ForecastViewController.swift */,
+				C0CBA13520A0A25E00CE8927 /* HotelTableViewController.swift */,
+				C0C108E320A0B6F100D65D99 /* HotelDetailViewController.swift */,
+				C064AD6E20A149CE005C7489 /* RatingViewController.swift */,
+				C0F38EFC20A1BE08007265C9 /* CitySelectionTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C07CC891209CF0630018E647 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C09DC1FE209342E6001C441D /* APIConnect.swift */,
+				C07CC892209CF0740018E647 /* FirstTimeRun.swift */,
+				C064AD6C20A14737005C7489 /* RatingControl.swift */,
+				C0D99B2020A194340028D0E7 /* Constant.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C0FC23DD209EBD26005633E4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C0FC23DE209EBD3A005633E4 /* SearchingHotelTableViewCell.swift */,
+				C0CBA13320A09F4F00CE8927 /* HotelDetailTableViewCell.swift */,
+				C05F2E2020A2171200BC687D /* ForecastTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,9 +188,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C013F7762092D36C001A9956 /* Build configuration list for PBXNativeTarget "TravelApp" */;
 			buildPhases = (
+				6D8A70E2D35F045A572E9CD5 /* [CP] Check Pods Manifest.lock */,
 				C013F75D2092D36B001A9956 /* Sources */,
 				C013F75E2092D36B001A9956 /* Frameworks */,
 				C013F75F2092D36B001A9956 /* Resources */,
+				BB5C53A77C4BC5AEEE38DFB1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -112,6 +216,9 @@
 					C013F7602092D36B001A9956 = {
 						CreatedOnToolsVersion = 9.3;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -150,14 +257,77 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6D8A70E2D35F045A572E9CD5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TravelApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB5C53A77C4BC5AEEE38DFB1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TravelApp/Pods-TravelApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/ForecastIO/ForecastIO.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ForecastIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TravelApp/Pods-TravelApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C013F75D2092D36B001A9956 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C013F7672092D36B001A9956 /* ViewController.swift in Sources */,
+				C0C0606B209A53E300EF8A69 /* MainVC.swift in Sources */,
+				C0C108E420A0B6F100D65D99 /* HotelDetailViewController.swift in Sources */,
+				C07C44E820948491007F9AA4 /* SignUpViewController.swift in Sources */,
+				C0FC23DF209EBD3A005633E4 /* SearchingHotelTableViewCell.swift in Sources */,
+				C09DC1FF209342E6001C441D /* APIConnect.swift in Sources */,
+				C013F77E2092D7A7001A9956 /* LoginViewController.swift in Sources */,
+				C03C00DB209F13B000C56018 /* Hotel.swift in Sources */,
+				C07CC893209CF0740018E647 /* FirstTimeRun.swift in Sources */,
+				C0D99B2120A194340028D0E7 /* Constant.swift in Sources */,
 				C013F7652092D36B001A9956 /* AppDelegate.swift in Sources */,
+				C03C00DD209F155B00C56018 /* HotelData.swift in Sources */,
+				C0F38EFD20A1BE08007265C9 /* CitySelectionTableViewController.swift in Sources */,
+				C0CBA13620A0A25E00CE8927 /* HotelTableViewController.swift in Sources */,
+				C0075FF12099C45C000F885F /* User.swift in Sources */,
+				C0CBA13420A09F4F00CE8927 /* HotelDetailTableViewCell.swift in Sources */,
 				C013F76D2092D36B001A9956 /* TravelApp.xcdatamodeld in Sources */,
+				C03C2C402095768F000C0774 /* AccountPopoverViewController.swift in Sources */,
+				C064AD6F20A149CE005C7489 /* RatingViewController.swift in Sources */,
+				C05F2E2120A2171200BC687D /* ForecastTableViewCell.swift in Sources */,
+				C07190CD209B79A9005FECFC /* ForecastViewController.swift in Sources */,
+				C064AD6D20A14737005C7489 /* RatingControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +469,7 @@
 		};
 		C013F7772092D36C001A9956 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20250D11481E05A5FC6D59C5 /* Pods-TravelApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -316,6 +487,7 @@
 		};
 		C013F7782092D36C001A9956 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 65BEB6BBC901E94E539CF356 /* Pods-TravelApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
