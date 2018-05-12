@@ -607,7 +607,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="36" id="10O-Nm-und" customClass="HotelDetailTableViewCell" customModule="TravelApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="36" id="10O-Nm-und" customClass="HotelDetailTableViewCell" customModule="TravelApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="328" width="375" height="36"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="10O-Nm-und" id="Ca4-1I-fSS">
@@ -763,7 +763,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="KvP-fM-Ycc">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="148.5"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test" translatesAutoresizingMaskIntoConstraints="NO" id="M71-D3-UdP">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="accountVCbackgroud" translatesAutoresizingMaskIntoConstraints="NO" id="M71-D3-UdP">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="148.5"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -923,7 +923,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <variation key="heightClass=compact-widthClass=compact"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.49411764705882355" green="0.66274509803921566" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1000,6 +999,7 @@
     </scenes>
     <resources>
         <image name="account" width="24" height="24"/>
+        <image name="accountVCbackgroud" width="300" height="250"/>
         <image name="bookmark" width="24" height="24"/>
         <image name="default" width="128" height="128"/>
         <image name="favorite" width="24" height="24"/>
@@ -1009,7 +1009,6 @@
         <image name="mainVCrecommend" width="32" height="32"/>
         <image name="mainVCsearch" width="32" height="32"/>
         <image name="mainVCweather" width="32" height="32"/>
-        <image name="test" width="300" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eE6-Mg-tl2"/>
