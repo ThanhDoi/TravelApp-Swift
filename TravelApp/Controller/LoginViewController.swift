@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import CoreData
 
 class LoginViewController: UIViewController {
     
@@ -22,6 +21,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        configLayouts()
+        RunFirst.shared.getHotels()
+    }
+    
+    func configLayouts() {
         emailTextField.layer.borderWidth = 1
         emailTextField.layer.borderColor = UIColor.white.cgColor
         emailTextField.layer.cornerRadius = 10
@@ -40,18 +44,21 @@ class LoginViewController: UIViewController {
         signupString.append(signupStringPart1)
         signupString.append(signupStringPart2)
         signupButton.setAttributedTitle(signupString, for: UIControlState.normal)
-        
-        FirstTimeRun.shared.getHotels()
     }
+    
+    //    func createAlertController(title: String, mesage: String) -> UIAlertController {
+    //        let alertController = UIAlertController(title: title, message: mesage, preferredStyle: .alert)
+    //        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+    //        alertController.addAction(okAction)
+    //        return alertController
+    //    }
     
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         if checkFields() {
-            let alertController = UIAlertController(title: "Oops", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
-        } else {
             checkLogin()
+        } else {
+            let alertController = createAlertController(title: "Oops", mesage: "We can't proceed because one of the fields is blank. Please note that all fields are required.")
+            present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -63,32 +70,30 @@ class LoginViewController: UIViewController {
     }
     
     func checkFields() -> Bool {
-        return (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)!
+        return !(emailTextField.text?.isEmpty)! && !(passwordTextField.text?.isEmpty)!
     }
     
     func checkLogin() {
         let email = (emailTextField.text)!
         let password = (passwordTextField.text)!
-        let url = "http://127.0.0.1:8000/api/login"
-        let parameters = ["email": email, "password": password]
-        let headers = ["Accept": "application/json",
-                       "Content-Type": "application/json"]
-        
-        APIConnect.shared.requestAPI(url: url, method: .post, parameters: parameters, encoding: "JSON", headers: headers) { json in
-            if json["data"].exists() {
-                UserDefaults.standard.set(true, forKey: "hasSignedIn")
-                if let name = json["data"]["name"].string, let email = json["data"]["email"].string, let api_token = json["data"]["api_token"].string, let user_id = json["data"]["id"].int {
-                    UserDefaults.standard.set(name, forKey: "UserName")
-                    UserDefaults.standard.set(email, forKey: "UserEmail")
-                    UserDefaults.standard.set(api_token, forKey: "UserApiToken")
-                    UserDefaults.standard.set(user_id, forKey: "UserId")
-                    User.shared.createUser()
+        APIConnect.shared.requestAPI(urlRequest: Router.login(email, password)) { (isSuccess, json) in
+            if isSuccess {
+                if json["data"].exists() {
+                    UserDefaults.standard.set(true, forKey: "hasSignedIn")
+                    if let name = json["data"]["name"].string, let email = json["data"]["email"].string, let api_token = json["data"]["api_token"].string, let user_id = json["data"]["id"].int {
+                        UserDefaults.standard.set(name, forKey: "UserName")
+                        UserDefaults.standard.set(email, forKey: "UserEmail")
+                        UserDefaults.standard.set(api_token, forKey: "UserApiToken")
+                        UserDefaults.standard.set(user_id, forKey: "UserId")
+                        User.shared.createUser()
+                    }
+                    self.performSegue(withIdentifier: "loginToMainSegue", sender: self)
+                } else {
+                    let alertController = createAlertController(title: "Oops", mesage: "Wrong credentials. Please try again!")
+                    self.present(alertController, animated: true, completion: nil)
                 }
-                self.performSegue(withIdentifier: "loginToMainSegue", sender: self)
             } else {
-                let alertController = UIAlertController(title: "Oops", message: "Wrong credentials. Please try again!", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                alertController.addAction(okAction)
+                let alertController = createAlertController(title: "Oops", mesage: "Something went wrong. Please try again!")
                 self.present(alertController, animated: true, completion: nil)
             }
         }
@@ -97,23 +102,22 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UserDefaults.standard.bool(forKey: "hasSignedIn") {
-            User.shared.createUser()
-            performSegue(withIdentifier: "loginToMainSegue", sender: nil)
+        RunFirst.shared.checkConnection { (isSuccess) in
+            if isSuccess {
+                if UserDefaults.standard.bool(forKey: "hasSignedIn") {
+                    User.shared.createUser()
+                    self.performSegue(withIdentifier: "loginToMainSegue", sender: nil)
+                }
+            } else {
+                let alertController = createAlertController(title: "Oops", mesage: "Cannot connect to server. Please try again later!")
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
     
     @IBAction func unwindToHomeScreen(segue: UIStoryboardSegue) {

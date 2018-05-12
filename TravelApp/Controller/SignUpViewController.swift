@@ -15,11 +15,15 @@ class SignUpViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var passwordConfirmationTextField: UITextField!
     @IBOutlet var signUpButton: UIButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        configLayouts()
+    }
+    
+    func configLayouts() {
         nameTextField.layer.borderWidth = 1
         nameTextField.layer.borderColor = UIColor.white.cgColor
         nameTextField.layer.cornerRadius = 10
@@ -47,38 +51,48 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
         if checkFields() {
-            let alertController = UIAlertController(title: "Oops", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
-        } else {
-            let url = "http://127.0.0.1:8000/api/register"
-            let parameters = ["name": nameTextField.text!, "email": emailTextField.text!, "password": passwordTextField.text!, "password_confirmation": passwordConfirmationTextField.text!]
-            let headers = ["Accept": "application/json",
-                           "Content-Type": "application/json"]
-            APIConnect.shared.requestAPI(url: url, method: .post, parameters: parameters, encoding: "JSON", headers: headers) { (json) in
-                if json["errors"].exists() {
-                    var error = "Error:"
-                    for (key, value) in json["errors"] {
-                        error.append("\n- \(value[0].string!)")
+            APIConnect.shared.requestAPI(urlRequest: Router.signup(nameTextField.text!, emailTextField.text!, passwordTextField.text!, passwordConfirmationTextField.text!)) { (isSuccess, json) in
+                if isSuccess {
+                    if json["errors"].exists() {
+                        var error = "Error:"
+                        for (_, value) in json["errors"] {
+                            error.append("\n- \(value[0].string!)")
+                        }
+                        let alertController = createAlertController(title: "Oops", mesage: error)
+                        self.present(alertController, animated: true, completion: nil)
+                    } else {
+                        UserDefaults.standard.set(true, forKey: "hasSignedIn")
+                        if let name = json["data"]["name"].string, let email = json["data"]["email"].string, let api_token = json["data"]["api_token"].string, let user_id = json["data"]["id"].int {
+                            UserDefaults.standard.set(name, forKey: "UserName")
+                            UserDefaults.standard.set(email, forKey: "UserEmail")
+                            UserDefaults.standard.set(api_token, forKey: "UserApiToken")
+                            UserDefaults.standard.set(user_id, forKey: "UserId")
+                            User.shared.createUser()
+                        }
+                        let alertController = UIAlertController(title: "Done", message: "Your account has been created successfully and is ready to use!", preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: { (_) in
+                            self.performSegue(withIdentifier: "signupToMainSegue", sender: self)
+                        })
+                        alertController.addAction(okAction)
+                        self.present(alertController, animated: true, completion: nil)
                     }
-                    let alertController = UIAlertController(title: "Oops", message: error, preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(okAction)
-                    self.present(alertController, animated: true, completion: nil)
                 } else {
-                    self.performSegue(withIdentifier: "signupToMainSegue", sender: self)
+                    let alertController = createAlertController(title: "Oops", mesage: "Something went wrong. Please try again!")
+                    self.present(alertController, animated: true, completion: nil)
                 }
             }
+        } else {
+            let alertController = createAlertController(title: "Oops", mesage: "We can't proceed because one of the fields is blank. Please note that all fields are required.")
+            present(alertController, animated: true, completion: nil)
         }
     }
-
+    
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
     func checkFields() -> Bool {
-        return (nameTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! || (passwordConfirmationTextField.text?.isEmpty)!
+        return !(nameTextField.text?.isEmpty)! && !(emailTextField.text?.isEmpty)! && !(passwordTextField.text?.isEmpty)! && !(passwordConfirmationTextField.text?.isEmpty)!
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,15 +100,4 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

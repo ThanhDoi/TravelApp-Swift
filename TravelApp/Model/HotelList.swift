@@ -8,12 +8,16 @@
 
 import Foundation
 
-class HotelData {
-    static let shared = HotelData()
+class HotelList {
+    
+    static let shared = HotelList()
     
     var hotels: [Hotel] = []
+    var visitedHotels: [Hotel] = []
+    var bookmarkedHotels: [Int] = []
     
     private init() {
         
     }
+    
 }

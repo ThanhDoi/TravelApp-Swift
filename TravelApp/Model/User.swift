@@ -18,14 +18,15 @@ class User {
     
     var name: String!
     var email: String!
-    var api_token: String!
-    var user_id: Int!
+    var apiToken: String!
+    var userID: Int!
     
     func createUser() {
         self.name = UserDefaults.standard.value(forKey: "UserName") as! String
         self.email = UserDefaults.standard.value(forKey: "UserEmail") as! String
-        self.api_token = UserDefaults.standard.value(forKey: "UserApiToken") as! String
-        self.user_id = UserDefaults.standard.value(forKey: "UserId") as! Int
+        self.apiToken = UserDefaults.standard.value(forKey: "UserApiToken") as! String
+        self.userID = UserDefaults.standard.value(forKey: "UserId") as! Int
+        Router.Constants.authenticationToken = "Bearer \(User.shared.apiToken!)"
     }
     
     func destroy() {
@@ -34,5 +35,11 @@ class User {
         UserDefaults.standard.removeObject(forKey: "UserEmail")
         UserDefaults.standard.removeObject(forKey: "UserApiToken")
         UserDefaults.standard.removeObject(forKey: "UserId")
+        UserDefaults.standard.removeObject(forKey: "bookmarkedHotels")
+        self.name = nil
+        self.email = nil
+        self.apiToken = nil
+        self.userID = nil
     }
+    
 }

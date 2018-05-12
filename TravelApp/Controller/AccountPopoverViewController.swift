@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class AccountPopoverViewController: UIViewController {
+    
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -23,10 +24,14 @@ class AccountPopoverViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        configLayouts()
+        reloadData()
+    }
+    
+    func configLayouts() {
         logoutButton.layer.borderWidth = 1
         logoutButton.layer.borderColor = UIColor.white.cgColor
         logoutButton.layer.cornerRadius = 10
-        reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,58 +49,47 @@ class AccountPopoverViewController: UIViewController {
         confirmPasswordTextField.isEnabled = false
         updateButton.isEnabled = false
     }
+    
     @IBAction func updateButtonTapped(_ sender: UIButton) {
         if checkFields() {
-            let alertController = UIAlertController(title: "Oops", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
-        } else {
             let name = (nameTextField.text)!
             let password = (passwordTextField.text)!
-            let api_token = User.shared.api_token!
-            let id = User.shared.user_id!
-            let url = "http://127.0.0.1:8000/api/users/\(id)"
-            print(url)
-            let parameters = ["name": name, "password": password]
-            let headers = ["Accept": "application/json",
-                           "Content-Type": "application/json",
-                           "Authorization": "Bearer \(api_token)"]
-            if !checkPassword() {
-                let alertController = UIAlertController(title: "Oops", message: "Confirmation password does not match. Please check.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                alertController.addAction(okAction)
-                present(alertController, animated: true, completion: nil)
-            } else {
-                UserDefaults.standard.set(true, forKey: "hasSignedIn")
-                APIConnect.shared.requestAPI(url: url, method: .put, parameters: parameters, encoding: "JSON", headers: headers) { (json) in
-                    if json["data"].exists() {
-                        UserDefaults.standard.set(true, forKey: "hasSignedIn")
-                        if let name = json["data"]["name"].string, let email = json["data"]["email"].string, let api_token = json["data"]["api_token"].string, let user_id = json["data"]["id"].int {
-                            UserDefaults.standard.set(name, forKey: "UserName")
-                            UserDefaults.standard.set(email, forKey: "UserEmail")
-                            UserDefaults.standard.set(api_token, forKey: "UserApiToken")
-                            UserDefaults.standard.set(user_id, forKey: "UserId")
-                            User.shared.createUser()
-                            let alertController = UIAlertController(title: "", message: "User info updated!", preferredStyle: .alert)
-                            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                            alertController.addAction(okAction)
+            if checkPassword() {
+                APIConnect.shared.requestAPI(urlRequest: Router.changeInfo(name, password)) { (isSuccess, json) in
+                    if isSuccess {
+                        if json["data"].exists() {
+                            UserDefaults.standard.set(true, forKey: "hasSignedIn")
+                            if let name = json["data"]["name"].string, let email = json["data"]["email"].string, let api_token = json["data"]["api_token"].string, let user_id = json["data"]["id"].int {
+                                UserDefaults.standard.set(name, forKey: "UserName")
+                                UserDefaults.standard.set(email, forKey: "UserEmail")
+                                UserDefaults.standard.set(api_token, forKey: "UserApiToken")
+                                UserDefaults.standard.set(user_id, forKey: "UserId")
+                                User.shared.createUser()
+                                let alertController = createAlertController(title: "Done", mesage: "User info updated!")
+                                self.present(alertController, animated: true, completion: nil)
+                                self.reloadData()
+                            }
+                        } else {
+                            let alertController = createAlertController(title: "Oops", mesage: "Wrong credentials. Please try again!")
                             self.present(alertController, animated: true, completion: nil)
-                            self.reloadData()
                         }
                     } else {
-                        let alertController = UIAlertController(title: "Oops", message: "Wrong credentials. Please try again!", preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                        alertController.addAction(okAction)
+                        let alertController = createAlertController(title: "Oops", mesage: "Something went wrong. Please try again!")
                         self.present(alertController, animated: true, completion: nil)
                     }
                 }
+            } else {
+                let alertController = createAlertController(title: "Oops", mesage: "Confirmation password does not match. Please check.")
+                present(alertController, animated: true, completion: nil)
             }
+        } else {
+            let alertController = createAlertController(title: "Oops", mesage: "We can't proceed because one of the fields is blank. Please note that all fields are required.")
+            present(alertController, animated: true, completion: nil)
         }
     }
     
     func checkFields() -> Bool {
-        return (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! || (confirmPasswordTextField.text?.isEmpty)!
+        return !(emailTextField.text?.isEmpty)! && !(passwordTextField.text?.isEmpty)! && !(confirmPasswordTextField.text?.isEmpty)!
     }
     
     func checkPassword() -> Bool {
@@ -112,14 +106,5 @@ class AccountPopoverViewController: UIViewController {
         confirmPasswordTextField.isEnabled = true
         updateButton.isEnabled = true
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
