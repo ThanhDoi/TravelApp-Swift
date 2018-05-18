@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         configLayouts()
         RunFirst.shared.getHotels()
+        RunFirst.shared.getAttractions()
     }
     
     func configLayouts() {
@@ -46,13 +47,6 @@ class LoginViewController: UIViewController {
         signupButton.setAttributedTitle(signupString, for: UIControlState.normal)
     }
     
-    //    func createAlertController(title: String, mesage: String) -> UIAlertController {
-    //        let alertController = UIAlertController(title: title, message: mesage, preferredStyle: .alert)
-    //        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-    //        alertController.addAction(okAction)
-    //        return alertController
-    //    }
-    
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         if checkFields() {
             checkLogin()
@@ -66,7 +60,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signupButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "loginToSignUpSegue", sender: self)
+        performSegue(withIdentifier: "showSignUpSegue", sender: self)
     }
     
     func checkFields() -> Bool {
@@ -87,7 +81,7 @@ class LoginViewController: UIViewController {
                         UserDefaults.standard.set(user_id, forKey: "UserId")
                         User.shared.createUser()
                     }
-                    self.performSegue(withIdentifier: "loginToMainSegue", sender: self)
+                    self.performSegue(withIdentifier: "showMainSegue", sender: self)
                 } else {
                     let alertController = createAlertController(title: "Oops", mesage: "Wrong credentials. Please try again!")
                     self.present(alertController, animated: true, completion: nil)
@@ -106,7 +100,7 @@ class LoginViewController: UIViewController {
             if isSuccess {
                 if UserDefaults.standard.bool(forKey: "hasSignedIn") {
                     User.shared.createUser()
-                    self.performSegue(withIdentifier: "loginToMainSegue", sender: nil)
+                    self.performSegue(withIdentifier: "showMainSegue", sender: nil)
                 }
             } else {
                 let alertController = createAlertController(title: "Oops", mesage: "Cannot connect to server. Please try again later!")

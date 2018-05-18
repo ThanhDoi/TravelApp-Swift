@@ -33,8 +33,8 @@ class RunFirst {
             if isSuccess {
                 for value in json {
                     let data = value.1
-                    let hotel = Hotel(id: data["id"].int!, name: data["name"].string!, location: data["location"].string!, price: data["price"].string!, star: data["star"].string!, features: data["features"].string!, img_url: data["img_url"].string!, city_id: data["city_id"].int!)
-                    HotelList.shared.hotels.append(hotel)
+                    let hotel = Hotel(id: data["id"].int!, name: data["name"].string!, location: data["location"].string!, price: data["price"].string!, star: data["star"].string!, features: data["features"].string!, img_url: data["img_url"].string!, cityID: data["city_id"].int!)
+                    Item.shared.hotels.append(hotel)
                 }
             }
         }
@@ -52,12 +52,24 @@ class RunFirst {
                     dateFormatter.locale = Locale(identifier: "en_US_POSIX")
                     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     let date = dateFormatter.date(from: dateString!)
-                    let hotel = HotelList.shared.hotels[hotelID! - 1]
+                    let hotel = Item.shared.hotels[hotelID! - 1]
                     hotel.visitedDate = date
-                    HotelList.shared.visitedHotels.append(hotel)
+                    Item.shared.visitedHotels.append(hotel)
                 }
                 DispatchQueue.main.async {
                     completion()
+                }
+            }
+        }
+    }
+    
+    func getAttractions() {
+        APIConnect.shared.requestAPI(urlRequest: Router.getAttractions) { (isSuccess, json) in
+            if isSuccess {
+                for value in json {
+                    let data = value.1
+                    let attraction = Attraction(id: data["id"].int!, name: data["name"].string!, location: data["location"].string!, features: data["features"].string!, img_url: data["img_url"].string!, cityID: data["city_id"].int!)
+                    Item.shared.attractions.append(attraction)
                 }
             }
         }

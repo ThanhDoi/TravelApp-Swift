@@ -20,17 +20,17 @@ class Hotel {
     var features = ""
     var img_url = ""
     var img: Data?
-    var city_id = 0
+    var cityID = 0
     var diffWithAvgRating: Double!
     var visitedDate: Date?
     
-    init(id: Int,name: String, location: String, price: String, star: String, features: String, img_url: String, city_id: Int) {
+    init(id: Int,name: String, location: String, price: String, star: String, features: String, img_url: String, cityID: Int) {
         self.id = id
         self.name = name
         self.location = location
         self.price = price
         self.star = star
-        self.city_id = city_id
+        self.cityID = cityID
         let regex = "\\'(.*?)\\'"
         let results = matchesForRegexInText(regex: regex, text: features)
         for result in results {

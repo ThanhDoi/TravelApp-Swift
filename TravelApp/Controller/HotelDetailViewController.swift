@@ -35,8 +35,13 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
             cell.fieldLabel.text = "Rating"
             cell.valueLabel.attributedText = valueText
         case 2:
-            cell.fieldLabel.text = "Location"
-            cell.valueLabel.text = hotel.location
+            cell.fieldLabel.isHidden = true
+            cell.valueLabel.isHidden = true
+            cell.ratingControl.isHidden = false
+            cell.selectionStyle = .none
+//        case 2:
+//            cell.fieldLabel.text = "Location"
+//            cell.valueLabel.text = hotel.location
         case 3:
             cell.fieldLabel.text = "Price"
             cell.valueLabel.text = hotel.price
@@ -46,6 +51,7 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
         case 5:
             cell.fieldLabel.text = "Features"
             cell.valueLabel.text = hotel.features
+        
         default:
             cell.fieldLabel.text = ""
             cell.valueLabel.text = ""
@@ -77,9 +83,9 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.backgroundColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.2)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        tableView.estimatedRowHeight = 36.0
+        tableView.estimatedRowHeight = 50.0
         tableView.rowHeight = UITableViewAutomaticDimension
-        if HotelList.shared.bookmarkedHotels.contains(hotel.id) {
+        if Item.shared.bookmarkedHotels.contains(hotel.id) {
             favoriteButton.setImage(#imageLiteral(resourceName: "removefav"), for: .normal)
         } else {
             favoriteButton.setImage(#imageLiteral(resourceName: "favorite"), for: .normal)
@@ -138,16 +144,16 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
-        if HotelList.shared.bookmarkedHotels.contains(hotel.id) {
-            let index = HotelList.shared.bookmarkedHotels.index(of: hotel.id)
-            HotelList.shared.bookmarkedHotels.remove(at: index!)
-            UserDefaults.standard.set(HotelList.shared.bookmarkedHotels, forKey: "bookmarkedHotels")
+        if Item.shared.bookmarkedHotels.contains(hotel.id) {
+            let index = Item.shared.bookmarkedHotels.index(of: hotel.id)
+            Item.shared.bookmarkedHotels.remove(at: index!)
+            UserDefaults.standard.set(Item.shared.bookmarkedHotels, forKey: "bookmarkedHotels")
             let alertController = createAlertController(title: "Done", mesage: "Remove from bookmarked hotels")
             favoriteButton.setImage(#imageLiteral(resourceName: "favorite"), for: .normal)
             present(alertController, animated: true, completion: nil)
         } else {
-            HotelList.shared.bookmarkedHotels.append(hotel.id)
-            UserDefaults.standard.set(HotelList.shared.bookmarkedHotels, forKey: "bookmarkedHotels")
+            Item.shared.bookmarkedHotels.append(hotel.id)
+            UserDefaults.standard.set(Item.shared.bookmarkedHotels, forKey: "bookmarkedHotels")
             let alertController = createAlertController(title: "Done", mesage: "Bookmarked this hotel")
             favoriteButton.setImage(#imageLiteral(resourceName: "removefav"), for: .normal)
             present(alertController, animated: true, completion: nil)

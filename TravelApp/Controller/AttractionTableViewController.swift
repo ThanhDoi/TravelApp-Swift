@@ -1,17 +1,17 @@
 //
-//  HotelTableViewController.swift
+//  AttractionTableViewController.swift
 //  TravelApp
 //
-//  Created by Thanh Doi on 5/7/18.
+//  Created by Thanh Doi on 5/17/18.
 //  Copyright © 2018 Thanh Doi. All rights reserved.
 //
 
 import UIKit
 
-class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
+class AttractionTableViewController: UITableViewController, UISearchResultsUpdating {
     
-    var hotels: [Hotel] = []
-    var searchResults: [Hotel] = []
+    var attractions: [Attraction] = []
+    var searchResults: [Attraction] = []
     var alert = UIAlertController()
     var isWaiting = false
     var isWrong = false
@@ -26,19 +26,18 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
     }
     
     func filterHotel(for searchText: String) {
-        searchResults = hotels.filter({ (hotel) -> Bool in
-            let isMatch = hotel.name.localizedCaseInsensitiveContains(searchText) || hotel.location.localizedCaseInsensitiveContains(searchText)
-            
+        searchResults = attractions.filter({ (attraction) -> Bool in
+            let isMatch = attraction.name.localizedCaseInsensitiveContains(searchText) || attraction.location.localizedCaseInsensitiveContains(searchText)
             return isMatch
         })
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        
+
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         tableView.estimatedRowHeight = 80.0
@@ -49,7 +48,7 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         
-        NotificationCenter.default.addObserver(self, selector: #selector(dismissPleaseWait), name: NSNotification.Name(rawValue: didGetRecommenderResults), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissPleaseWait), name: NSNotification.Name(rawValue: didGetAttractionRecommenderResults), object: nil)
     }
     
     @objc private func dismissPleaseWait() {
@@ -59,9 +58,9 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: didGetRecommenderResults), object: self)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: didGetAttractionRecommenderResults), object: self)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -91,62 +90,42 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
             }
         }
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if searchController.isActive {
             return searchResults.count
         } else {
-            return hotels.count
+            return attractions.count
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HotelTableViewCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! AttractionTableViewCell
+
         // Configure the cell...
-        let hotel = searchController.isActive ? searchResults[indexPath.row] : hotels[indexPath.row]
-        cell.hotelNameLabel.text = hotel.name
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "EEE, MMM dd YYYY"
-        cell.hotelLocationLabel.text = hotel.location
-        if hotel.img == nil {
-            if hotel.img_url.isEmpty == false {
-                hotel.downloadImage(url: hotel.img_url) { (imageData) in
-                    hotel.img = NSData(data: imageData) as Data
-                    cell.hotelImageView.image = UIImage(data: hotel.img!)
-                    tableView.reloadData()
-                }
-            } else {
-                cell.hotelImageView.image = #imageLiteral(resourceName: "imagenotfound")
-            }
-        } else {
-            cell.hotelImageView.image = UIImage(data: hotel.img!)
-        }
-        
+        let attraction = searchController.isActive ? searchResults[indexPath.row] : attractions[indexPath.row]
+        cell.attractionNameLabel.text = attraction.name
+        cell.attractionLocationLabel.text = attraction.location
+        cell.attractionImageView.image = #imageLiteral(resourceName: "imagenotfound")
+
         return cell
     }
     
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "showHotelDetail" {
+        if segue.identifier == "showAttractionDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let destVC = segue.destination as! HotelDetailViewController
-                destVC.hotel = searchController.isActive ? searchResults[indexPath.row] : hotels[indexPath.row]
-                //                destVC.isRecommend = self.isRecommend
+                let destVC = segue.destination as! AttractionDetailViewController
+                destVC.attraction = searchController.isActive ? searchResults[indexPath.row] : attractions[indexPath.row]
             }
         }
     }
+
 }

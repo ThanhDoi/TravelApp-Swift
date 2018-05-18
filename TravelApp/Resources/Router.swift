@@ -20,13 +20,15 @@ public enum Router: URLRequestConvertible {
     case signup(String, String, String, String)
     case getHotels
     case changeInfo(String, String)
-    case getRecommend(Int, String)
+    case getHotelRecommend(Int)
     case getHotelAvgRating(Int)
     case getHotelRatedScore(Int)
     case rateHotel(Int, Int)
     case rateHotelRecommend(Int, Int)
     case getVisitedHotels
     case checkConnection
+    case getAttractions
+    case getAttractionRecommend(Int)
     
     var method: HTTPMethod {
         switch self {
@@ -49,8 +51,10 @@ public enum Router: URLRequestConvertible {
             return "/register"
         case .changeInfo:
             return "/users/"
-        case .getRecommend:
-            return "/getRecommend"
+        case .getHotelRecommend:
+            return "/getHotelRecommend"
+        case .getAttractionRecommend:
+            return "/getAttractionRecommend"
         case .getHotelAvgRating(let hotelID):
             return "/hotels/\(hotelID)/avgRating"
         case .getHotelRatedScore(let hotelID):
@@ -63,6 +67,8 @@ public enum Router: URLRequestConvertible {
             return "/users/visitedHotels"
         case .checkConnection:
             return "/checkConnect"
+        case .getAttractions:
+            return "/attractions"
         default:
             return "/"
         }
@@ -76,7 +82,9 @@ public enum Router: URLRequestConvertible {
             return ["name": name, "email": email, "password": password, "password_confirmation": passwordConfirmation]
         case .changeInfo(let name, let password):
             return ["name": name, "password": password]
-        case .getRecommend(let cityID, _):
+        case .getHotelRecommend(let cityID):
+            return ["city_id": cityID]
+        case .getAttractionRecommend(let cityID):
             return ["city_id": cityID]
         case .rateHotel(_, let rate):
             return ["rate": rate]

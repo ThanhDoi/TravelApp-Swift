@@ -1,19 +1,18 @@
 //
-//  HotelDetailTableViewCell.swift
+//  AttractionDetailTableViewCell.swift
 //  TravelApp
 //
-//  Created by Thanh Doi on 5/7/18.
+//  Created by Thanh Doi on 5/18/18.
 //  Copyright © 2018 Thanh Doi. All rights reserved.
 //
 
 import UIKit
 
-class HotelDetailTableViewCell: UITableViewCell {
-
+class AttractionDetailTableViewCell: UITableViewCell {
+    
     @IBOutlet var fieldLabel: UILabel!
     @IBOutlet var valueLabel: UILabel!
-    @IBOutlet var ratingControl: RatingControl!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

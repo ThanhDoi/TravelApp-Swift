@@ -8,11 +8,12 @@
 
 import Foundation
 
-class HotelList {
+class Item {
     
-    static let shared = HotelList()
+    static let shared = Item()
     
     var hotels: [Hotel] = []
+    var attractions: [Attraction] = []
     var visitedHotels: [Hotel] = []
     var bookmarkedHotels: [Int] = []
     

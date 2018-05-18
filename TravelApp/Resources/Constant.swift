@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 let didGetRecommenderResults = "didGetRecommenderResults"
+let didGetAttractionRecommenderResults = "didGetAttractionRecommenderResults"
 let didGetWeatherResults = "didGetWeatherResults"
 
 let cities = ["Hà Nội", "Thành phố Hồ Chí Minh"]

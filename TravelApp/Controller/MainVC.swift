@@ -26,7 +26,7 @@ class MainVC: UITableViewController {
     }
     
     @IBAction func showVisitedHotelButtonTapped(_ sender: UIBarButtonItem) {
-        HotelList.shared.visitedHotels.removeAll()
+        Item.shared.visitedHotels.removeAll()
         RunFirst.shared.getVisitedHotels {
             self.performSegue(withIdentifier: "showVisitedHotelsSegue", sender: self)
         }
@@ -39,8 +39,8 @@ class MainVC: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "showAllHotelSegue" {
-            if let destVC = segue.destination as? HotelTableViewController {
-                destVC.hotels = HotelList.shared.hotels
+            if let destVC = segue.destination as? TabBarController {
+                destVC.hotels = Item.shared.hotels
             }
         }
         
@@ -56,18 +56,10 @@ class MainVC: UITableViewController {
             }
         }
         
-        if segue.identifier == "showVisitedHotelsSegue" {
-            if let destVC = segue.destination as? HotelTableViewController {
-                destVC.isVisited = true
-                destVC.hotels = HotelList.shared.visitedHotels.sorted(by: { (hotel1, hotel2) -> Bool in
-                    return (hotel1.visitedDate! < hotel2.visitedDate!)
-                })
-            }
-        }
-        
-        if segue.identifier == "showBookmarkedHotels" {
-            if let destVC = segue.destination as? HotelTableViewController {
-                destVC.isBookmarked = true
+        if segue.identifier == "showSearchSegue" {
+            if let destVC = segue.destination as? TabBarController {
+                destVC.selectedIndex = 0
+                destVC.tabBar(destVC.tabBar, didSelect: destVC.tabBar.items![0])
             }
         }
     }
