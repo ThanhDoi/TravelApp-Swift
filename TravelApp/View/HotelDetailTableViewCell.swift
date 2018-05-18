@@ -12,7 +12,6 @@ class HotelDetailTableViewCell: UITableViewCell {
 
     @IBOutlet var fieldLabel: UILabel!
     @IBOutlet var valueLabel: UILabel!
-    @IBOutlet var ratingControl: RatingControl!
     
     override func awakeFromNib() {
         super.awakeFromNib()

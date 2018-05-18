@@ -17,14 +17,13 @@
 		C013F77B2092D383001A9956 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C013F77A2092D383001A9956 /* MapKit.framework */; };
 		C013F77E2092D7A7001A9956 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C013F77D2092D7A7001A9956 /* LoginViewController.swift */; };
 		C021F81520A4689300B0AC6D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C021F81420A4689300B0AC6D /* Router.swift */; };
+		C03A9B0720AED36D004F4108 /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A9B0620AED36D004F4108 /* RatingTableViewCell.swift */; };
 		C03C00DB209F13B000C56018 /* Hotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C00DA209F13B000C56018 /* Hotel.swift */; };
 		C03C00DD209F155B00C56018 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C00DC209F155B00C56018 /* Item.swift */; };
 		C03C2C402095768F000C0774 /* AccountPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C2C3F2095768F000C0774 /* AccountPopoverViewController.swift */; };
 		C042739720AE8D6300B566B7 /* AttractionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042739620AE8D6300B566B7 /* AttractionDetailViewController.swift */; };
 		C042739920AE8F2E00B566B7 /* AttractionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042739820AE8F2E00B566B7 /* AttractionDetailTableViewCell.swift */; };
 		C05F2E2120A2171200BC687D /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F2E2020A2171200BC687D /* ForecastTableViewCell.swift */; };
-		C064AD6D20A14737005C7489 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C064AD6C20A14737005C7489 /* RatingControl.swift */; };
-		C064AD6F20A149CE005C7489 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C064AD6E20A149CE005C7489 /* RatingViewController.swift */; };
 		C07190CD209B79A9005FECFC /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07190CC209B79A9005FECFC /* ForecastViewController.swift */; };
 		C07C44E820948491007F9AA4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C44E720948491007F9AA4 /* SignUpViewController.swift */; };
 		C07CC893209CF0740018E647 /* RunFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CC892209CF0740018E647 /* RunFirst.swift */; };
@@ -56,14 +55,13 @@
 		C013F77A2092D383001A9956 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C013F77D2092D7A7001A9956 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C021F81420A4689300B0AC6D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		C03A9B0620AED36D004F4108 /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
 		C03C00DA209F13B000C56018 /* Hotel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotel.swift; sourceTree = "<group>"; };
 		C03C00DC209F155B00C56018 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		C03C2C3F2095768F000C0774 /* AccountPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPopoverViewController.swift; sourceTree = "<group>"; };
 		C042739620AE8D6300B566B7 /* AttractionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionDetailViewController.swift; sourceTree = "<group>"; };
 		C042739820AE8F2E00B566B7 /* AttractionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		C05F2E2020A2171200BC687D /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
-		C064AD6C20A14737005C7489 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
-		C064AD6E20A149CE005C7489 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		C07190CC209B79A9005FECFC /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
 		C07C44E720948491007F9AA4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C07CC892209CF0740018E647 /* RunFirst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunFirst.swift; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 				C07190CC209B79A9005FECFC /* ForecastViewController.swift */,
 				C0CBA13520A0A25E00CE8927 /* HotelTableViewController.swift */,
 				C0C108E320A0B6F100D65D99 /* HotelDetailViewController.swift */,
-				C064AD6E20A149CE005C7489 /* RatingViewController.swift */,
 				C0F38EFC20A1BE08007265C9 /* CitySelectionTableViewController.swift */,
 				C0F1537C20ADBA0600E62A0B /* TabBarController.swift */,
 				C0F1537E20ADE32000E62A0B /* AttractionTableViewController.swift */,
@@ -192,12 +189,12 @@
 		C0FC23DD209EBD26005633E4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C064AD6C20A14737005C7489 /* RatingControl.swift */,
 				C0FC23DE209EBD3A005633E4 /* HotelTableViewCell.swift */,
 				C0CBA13320A09F4F00CE8927 /* HotelDetailTableViewCell.swift */,
 				C05F2E2020A2171200BC687D /* ForecastTableViewCell.swift */,
 				C0F1538220ADEF6400E62A0B /* AttractionTableViewCell.swift */,
 				C042739820AE8F2E00B566B7 /* AttractionDetailTableViewCell.swift */,
+				C03A9B0620AED36D004F4108 /* RatingTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -306,14 +303,22 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TravelApp/Pods-TravelApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/ForecastIO/ForecastIO.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ForecastIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,6 +345,7 @@
 				C09DC1FF209342E6001C441D /* APIConnect.swift in Sources */,
 				C013F77E2092D7A7001A9956 /* LoginViewController.swift in Sources */,
 				C03C00DB209F13B000C56018 /* Hotel.swift in Sources */,
+				C03A9B0720AED36D004F4108 /* RatingTableViewCell.swift in Sources */,
 				C07CC893209CF0740018E647 /* RunFirst.swift in Sources */,
 				C0D99B2120A194340028D0E7 /* Constant.swift in Sources */,
 				C013F7652092D36B001A9956 /* AppDelegate.swift in Sources */,
@@ -351,11 +357,9 @@
 				C0CBA13420A09F4F00CE8927 /* HotelDetailTableViewCell.swift in Sources */,
 				C013F76D2092D36B001A9956 /* TravelApp.xcdatamodeld in Sources */,
 				C03C2C402095768F000C0774 /* AccountPopoverViewController.swift in Sources */,
-				C064AD6F20A149CE005C7489 /* RatingViewController.swift in Sources */,
 				C05F2E2120A2171200BC687D /* ForecastTableViewCell.swift in Sources */,
 				C07190CD209B79A9005FECFC /* ForecastViewController.swift in Sources */,
 				C0F1537F20ADE32000E62A0B /* AttractionTableViewController.swift in Sources */,
-				C064AD6D20A14737005C7489 /* RatingControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,10 +506,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TravelApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Thanh-Doi.TravelApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -520,10 +521,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TravelApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Thanh-Doi.TravelApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

@@ -88,6 +88,7 @@ class CitySelectionTableViewController: UITableViewController, UISearchResultsUp
         if segue.identifier == "showRecommend" {
             if let destVC = segue.destination as? TabBarController {
                 destVC.cityID = cityID
+                destVC.isRecommend = true
                 destVC.selectedIndex = 0
                 destVC.tabBar(destVC.tabBar, didSelect: destVC.tabBar.items![0])
             }

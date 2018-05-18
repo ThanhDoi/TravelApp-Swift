@@ -14,6 +14,7 @@ class TabBarController: UITabBarController {
     var hotels: [Hotel] = []
     var cityID: Int = 0
     var isRecommend = false
+    var isBookmark = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ class TabBarController: UITabBarController {
             let destVC = viewControllers![index!] as! HotelTableViewController
             if isRecommend {
                 destVC.isWaiting = true
+                destVC.isRecommend = true
                 APIConnect.shared.requestAPI(urlRequest: Router.getHotelRecommend(cityID)) { (isSuccess, json) in
                     if isSuccess {
                         destVC.hotels = self.getHotelsResults(json: json)
@@ -44,6 +46,8 @@ class TabBarController: UITabBarController {
                         destVC.isWrong = true
                     }
                 }
+            } else if isBookmark {
+                destVC.isBookmark = true
             } else {
                 destVC.hotels = Item.shared.hotels
             }
@@ -59,6 +63,8 @@ class TabBarController: UITabBarController {
                         destVC.isWrong = true
                     }
                 }
+            } else if isBookmark {
+                destVC.isBookmark = true
             } else {
                 destVC.attractions = Item.shared.attractions
             }

@@ -18,21 +18,29 @@ public enum Router: URLRequestConvertible {
     case login(String, String)
     case logout
     case signup(String, String, String, String)
+    
     case getHotels
+    case getAttractions
+    
     case changeInfo(String, String)
+    
     case getHotelRecommend(Int)
     case getHotelAvgRating(Int)
-    case getHotelRatedScore(Int)
     case rateHotel(Int, Int)
     case rateHotelRecommend(Int, Int)
     case getVisitedHotels
+    
     case checkConnection
-    case getAttractions
+    
     case getAttractionRecommend(Int)
+    case getAttractionAvgRating(Int)
+    case rateAttraction(Int, Int)
+    case rateAttractionRecommend(Int, Int)
+    case getVisitedAttractions
     
     var method: HTTPMethod {
         switch self {
-        case .login, .signup, .rateHotel, .rateHotelRecommend:
+        case .login, .signup, .rateHotel, .rateHotelRecommend, .rateAttraction, .rateAttractionRecommend:
             return .post
         case .changeInfo:
             return .put
@@ -49,26 +57,35 @@ public enum Router: URLRequestConvertible {
             return "/hotels"
         case .signup:
             return "/register"
+            
         case .changeInfo:
             return "/users/"
+            
         case .getHotelRecommend:
             return "/getHotelRecommend"
         case .getAttractionRecommend:
             return "/getAttractionRecommend"
+            
         case .getHotelAvgRating(let hotelID):
             return "/hotels/\(hotelID)/avgRating"
-        case .getHotelRatedScore(let hotelID):
-            return "/hotels/\(hotelID)/ratedScore"
         case .rateHotel(let hotelID, _):
             return "/hotels/\(hotelID)/rate"
         case .rateHotelRecommend(let hotelID, _):
             return "/hotels/\(hotelID)/rateRecommend"
         case .getVisitedHotels:
             return "/users/visitedHotels"
+            
         case .checkConnection:
             return "/checkConnect"
+            
         case .getAttractions:
             return "/attractions"
+        case .getAttractionAvgRating(let attractionID):
+            return "/attractions/\(attractionID)/avgRating"
+        case .rateAttraction(let attractionID, _):
+            return "/attractions/\(attractionID)/rate"
+        case .rateAttractionRecommend(let attractionID, _):
+            return "/attractions/\(attractionID)/rateRecommend"
         default:
             return "/"
         }
@@ -89,6 +106,10 @@ public enum Router: URLRequestConvertible {
         case .rateHotel(_, let rate):
             return ["rate": rate]
         case .rateHotelRecommend(_, let rate):
+            return ["rate": rate]
+        case .rateAttraction(_, let rate):
+            return ["rate": rate]
+        case .rateAttractionRecommend(_, let rate):
             return ["rate": rate]
         default:
             return [:]

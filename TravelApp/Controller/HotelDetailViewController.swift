@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import NotificationBannerSwift
 
 class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var rating: Int!
+    var recommendRating: Int!
     var valueText = NSMutableAttributedString()
     var isRecommend = false
     var isRatedRecommend = false
@@ -18,9 +20,10 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet var tableView: UITableView!
     @IBOutlet var favoriteButton: UIButton!
     var hotel: Hotel!
+    var banner: StatusBarNotificationBanner?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -35,23 +38,28 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
             cell.fieldLabel.text = "Rating"
             cell.valueLabel.attributedText = valueText
         case 2:
-            cell.fieldLabel.isHidden = true
-            cell.valueLabel.isHidden = true
-            cell.ratingControl.isHidden = false
-            cell.selectionStyle = .none
-//        case 2:
-//            cell.fieldLabel.text = "Location"
-//            cell.valueLabel.text = hotel.location
+            let ratingCell = tableView.dequeueReusableCell(withIdentifier: "RatingCell", for: indexPath) as! RatingTableViewCell
+            ratingCell.backgroundColor = UIColor.clear
+            if self.rating != nil {
+                ratingCell.cosmosView.rating = Double(self.rating)
+            }
+            ratingCell.cosmosView.didFinishTouchingCosmos = { [weak self] rating in
+                self?.rating = Int(rating)
+                self?.doRate(rating: rating)
+            }
+            return ratingCell
         case 3:
+            cell.fieldLabel.text = "Location"
+            cell.valueLabel.text = hotel.location
+        case 4:
             cell.fieldLabel.text = "Price"
             cell.valueLabel.text = hotel.price
-        case 4:
+        case 5:
             cell.fieldLabel.text = "Star"
             cell.valueLabel.text = hotel.star
-        case 5:
+        case 6:
             cell.fieldLabel.text = "Features"
             cell.valueLabel.text = hotel.features
-        
         default:
             cell.fieldLabel.text = ""
             cell.valueLabel.text = ""
@@ -62,11 +70,22 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 1 {
-            performSegue(withIdentifier: "showRateSegue", sender: self)
+    func doRate(rating: Double) {
+        if self.isRecommend {
+            APIConnect.shared.requestAPI(urlRequest: Router.rateHotelRecommend(hotel.id!, Int(rating))) { (isSuccess, json) in
+                if isSuccess {
+                    self.isRatedRecommend = true
+                    self.banner?.show()
+                    self.checkRate()
+                }
+            }
         } else {
-            tableView.deselectRow(at: indexPath, animated: false)
+            APIConnect.shared.requestAPI(urlRequest: Router.rateHotel(hotel.id!, Int(rating))) { (isSuccess, json) in
+                if isSuccess {
+                    self.banner?.show()
+                    self.checkRate()
+                }
+            }
         }
     }
     
@@ -90,6 +109,7 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             favoriteButton.setImage(#imageLiteral(resourceName: "favorite"), for: .normal)
         }
+        banner = StatusBarNotificationBanner(title: "Rated", style: .success)
         checkRate()
     }
     
@@ -103,34 +123,29 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
                     let count = json["count"].int!
                     let average = json["average"].double!
                     self.valueText.append(NSAttributedString(string: "Score: \((average * 100).rounded()/100) by \(count) people"))
-                    let rating = json["user_rating"].int!
-                    if rating == -1 {
+                    self.rating = json["user_rating"].int!
+                    self.recommendRating = json["user_recommend_rating"].int!
+                    if self.rating == -1 {
                         let rateNow = NSAttributedString(string: " Rate now", attributes: [NSAttributedStringKey.foregroundColor: UIColor.blue])
                         let beenThere = NSAttributedString(string: "\nHave you been there?", attributes: [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Italic", size: 17.0)!])
                         let rateThisRecommend = NSAttributedString(string: "\nRate this recommend?", attributes: [NSAttributedStringKey.foregroundColor: UIColor.blue])
-                        self.navigationItem.rightBarButtonItem = nil
-                        if !self.isRecommend {
-                            self.valueText.append(beenThere)
-                            self.valueText.append(rateNow)
-                        } else {
-                            if self.isRatedRecommend {
-                                self.valueText.append(NSAttributedString(string: "\nYou rated \(self.rating!) this recommend"))
-                                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rate", style: .done, target: self, action: #selector(self.rateButtonTapped))
+                        if self.isRecommend {
+                            if self.recommendRating != -1 {
+                                self.valueText.append(NSAttributedString(string: "\nYou rated \(self.recommendRating!) this recommend"))
+                                self.rating = self.recommendRating
                             } else {
                                 self.valueText.append(rateThisRecommend)
                             }
+                        } else {
+                            self.valueText.append(beenThere)
+                            self.valueText.append(rateNow)
                         }
-                    } else {
-                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rate", style: .done, target: self, action: #selector(self.rateButtonTapped))
-                        self.valueText.append(NSAttributedString(string: "\nYou rated \(rating)"))
                     }
                 }
-                self.tableView.reloadData()
             } else {
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rate", style: .done, target: self, action: #selector(self.rateButtonTapped))
                 self.valueText.append(NSAttributedString(string: "Network error!"))
-                self.tableView.reloadData()
             }
+            self.tableView.reloadData()
         }
     }
     
@@ -139,75 +154,20 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    @objc func rateButtonTapped() {
-        performSegue(withIdentifier: "showRateSegue", sender: self)
-    }
-    
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
         if Item.shared.bookmarkedHotels.contains(hotel.id) {
             let index = Item.shared.bookmarkedHotels.index(of: hotel.id)
             Item.shared.bookmarkedHotels.remove(at: index!)
             UserDefaults.standard.set(Item.shared.bookmarkedHotels, forKey: "bookmarkedHotels")
-            let alertController = createAlertController(title: "Done", mesage: "Remove from bookmarked hotels")
+            let banner = StatusBarNotificationBanner(title: "Remove from bookmarked hotels", style: .success)
+            banner.show()
             favoriteButton.setImage(#imageLiteral(resourceName: "favorite"), for: .normal)
-            present(alertController, animated: true, completion: nil)
         } else {
             Item.shared.bookmarkedHotels.append(hotel.id)
             UserDefaults.standard.set(Item.shared.bookmarkedHotels, forKey: "bookmarkedHotels")
-            let alertController = createAlertController(title: "Done", mesage: "Bookmarked this hotel")
+            let banner = StatusBarNotificationBanner(title: "Added to bookmarked hotels", style: .success)
+            banner.show()
             favoriteButton.setImage(#imageLiteral(resourceName: "removefav"), for: .normal)
-            present(alertController, animated: true, completion: nil)
-        }
-    }
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "showRateSegue" {
-            if let destVC = segue.destination as? RatingViewController {
-                APIConnect.shared.requestAPI(urlRequest: Router.getHotelRatedScore(hotel.id!)) { (isSuccess, json) in
-                    if isSuccess {
-                        let rated = json["rated"].int
-                        destVC.ratingControl.rating = rated!
-                    } else {
-                        destVC.isWrong = true
-                    }
-                }
-            }
-        }
-    }
-    
-    @IBAction func unwindToDetail(segue: UIStoryboardSegue) {
-        if segue.source is RatingViewController {
-            if let senderVC = segue.source as? RatingViewController {
-                self.rating = senderVC.ratingControl.rating
-                if self.isRecommend {
-                    APIConnect.shared.requestAPI(urlRequest: Router.rateHotelRecommend(hotel.id!, self.rating!)) { (isSuccess, json) in
-                        if isSuccess {
-                            let alertController = createAlertController(title: "Done", mesage: "Rated this hotel!")
-                            self.isRatedRecommend = true
-                            self.checkRate()
-                            self.present(alertController, animated: true, completion: nil)
-                        } else {
-                            let alertController = createAlertController(title: "Oops", mesage: "Something went wrong. Please try again!")
-                            self.present(alertController, animated: true, completion: nil)
-                        }
-                    }
-                } else {
-                    APIConnect.shared.requestAPI(urlRequest: Router.rateHotel(hotel.id!, self.rating!)) { (isSuccess, json) in
-                        if isSuccess {
-                            let alertController = createAlertController(title: "Done", mesage: "Rated this hotel!")
-                            self.checkRate()
-                            self.present(alertController, animated: true, completion: nil)
-                        } else {
-                            let alertController = createAlertController(title: "Oops", mesage: "Something went wrong. Please try again!")
-                            self.present(alertController, animated: true, completion: nil)
-                        }
-                    }
-                }
-            }
         }
     }
     

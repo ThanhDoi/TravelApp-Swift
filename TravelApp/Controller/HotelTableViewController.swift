@@ -15,6 +15,8 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
     var alert = UIAlertController()
     var isWaiting = false
     var isWrong = false
+    var isRecommend = false
+    var isBookmark = false
     
     var searchController: UISearchController!
     
@@ -31,6 +33,19 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
             
             return isMatch
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if isBookmark {
+            var hotels = [Hotel]()
+            for index in Item.shared.bookmarkedHotels {
+                hotels.append(Item.shared.hotels[index - 1])
+            }
+            self.hotels = hotels
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidLoad() {
@@ -145,7 +160,7 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destVC = segue.destination as! HotelDetailViewController
                 destVC.hotel = searchController.isActive ? searchResults[indexPath.row] : hotels[indexPath.row]
-                //                destVC.isRecommend = self.isRecommend
+                destVC.isRecommend = self.isRecommend
             }
         }
     }

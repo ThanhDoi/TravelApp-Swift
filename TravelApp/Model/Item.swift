@@ -15,7 +15,9 @@ class Item {
     var hotels: [Hotel] = []
     var attractions: [Attraction] = []
     var visitedHotels: [Hotel] = []
+    var visitedAttractions: [Attraction] = []
     var bookmarkedHotels: [Int] = []
+    var bookmarkedAttractions: [Int] = []
     
     private init() {
         

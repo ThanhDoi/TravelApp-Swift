@@ -15,6 +15,8 @@ class AttractionTableViewController: UITableViewController, UISearchResultsUpdat
     var alert = UIAlertController()
     var isWaiting = false
     var isWrong = false
+    var isRecommend = false
+    var isBookmark = false
     
     var searchController: UISearchController!
     
@@ -31,13 +33,26 @@ class AttractionTableViewController: UITableViewController, UISearchResultsUpdat
             return isMatch
         })
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if isBookmark {
+            var attractions = [Attraction]()
+            for index in Item.shared.bookmarkedAttractions {
+                attractions.append(Item.shared.attractions[index - 1])
+            }
+            self.attractions = attractions
+            self.tableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         tableView.estimatedRowHeight = 80.0
@@ -60,7 +75,7 @@ class AttractionTableViewController: UITableViewController, UISearchResultsUpdat
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: didGetAttractionRecommenderResults), object: self)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -90,14 +105,14 @@ class AttractionTableViewController: UITableViewController, UISearchResultsUpdat
             }
         }
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if searchController.isActive {
@@ -106,16 +121,16 @@ class AttractionTableViewController: UITableViewController, UISearchResultsUpdat
             return attractions.count
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! AttractionTableViewCell
-
+        
         // Configure the cell...
         let attraction = searchController.isActive ? searchResults[indexPath.row] : attractions[indexPath.row]
         cell.attractionNameLabel.text = attraction.name
         cell.attractionLocationLabel.text = attraction.location
         cell.attractionImageView.image = #imageLiteral(resourceName: "imagenotfound")
-
+        
         return cell
     }
     
@@ -124,8 +139,9 @@ class AttractionTableViewController: UITableViewController, UISearchResultsUpdat
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destVC = segue.destination as! AttractionDetailViewController
                 destVC.attraction = searchController.isActive ? searchResults[indexPath.row] : attractions[indexPath.row]
+                destVC.isRecommend = self.isRecommend
             }
         }
     }
-
+    
 }

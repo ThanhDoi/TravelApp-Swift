@@ -62,6 +62,14 @@ class MainVC: UITableViewController {
                 destVC.tabBar(destVC.tabBar, didSelect: destVC.tabBar.items![0])
             }
         }
+        
+        if segue.identifier == "showBookmarkedItems" {
+            if let destVC = segue.destination as? TabBarController {
+                destVC.isBookmark = true
+                destVC.selectedIndex = 0
+                destVC.tabBar(destVC.tabBar, didSelect: destVC.tabBar.items![0])
+            }
+        }
     }
     
 }
