@@ -12,6 +12,8 @@ import SwiftyJSON
 class TabBarController: UITabBarController {
     
     var hotels: [Hotel] = []
+    var attractions: [Attraction] = []
+    var trip: Trip?
     var cityID: Int = 0
     var isRecommend = false
     var isBookmark = false
@@ -20,7 +22,6 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        tabBar.items![0].title = "HOTEL"
         tabBar.tintColor = UIColor(red: 235.0/255.0, green: 75.0/255.0, blue: 27.0/255.0, alpha: 1.0)
         tabBar.barTintColor = UIColor.black
     }
@@ -35,6 +36,10 @@ class TabBarController: UITabBarController {
         switch index {
         case 0:
             let destVC = viewControllers![index!] as! HotelTableViewController
+            if let trip = trip {
+                reloadVisitedData(trip: trip)
+                destVC.trip = self.trip
+            }
             if isRecommend {
                 destVC.isWaiting = true
                 destVC.isRecommend = true
@@ -49,12 +54,18 @@ class TabBarController: UITabBarController {
             } else if isBookmark {
                 destVC.isBookmark = true
             } else {
-                destVC.hotels = Item.shared.hotels
+                destVC.hotels = hotels
+                destVC.tableView.reloadData()
             }
         case 1:
             let destVC = viewControllers![index!] as! AttractionTableViewController
+            if let trip = trip {
+                reloadVisitedData(trip: trip)
+                destVC.trip = self.trip
+            }
             if isRecommend {
                 destVC.isWaiting = true
+                destVC.isRecommend = true
                 APIConnect.shared.requestAPI(urlRequest: Router.getAttractionRecommend(cityID)) { (isSuccess, json) in
                     if isSuccess {
                         destVC.attractions = self.getAttractionsResults(json: json)
@@ -66,10 +77,34 @@ class TabBarController: UITabBarController {
             } else if isBookmark {
                 destVC.isBookmark = true
             } else {
-                destVC.attractions = Item.shared.attractions
+                destVC.attractions = attractions
+                destVC.tableView.reloadData()
             }
         default:
             print("ABC")
+        }
+    }
+    
+    func reloadVisitedData(trip: Trip) {
+        APIConnect.shared.requestAPI(urlRequest: Router.getItemsInTrip(trip.id)) { (isSuccess, json) in
+            if isSuccess {
+                var attractions = [Attraction]()
+                var hotels = [Hotel]()
+                let attractionIDs = json["attractions"]
+                let hotelIDs = json["hotels"]
+                for attractionID in attractionIDs {
+                    let data = attractionID.1
+                    let attraction = Item.shared.attractions[data.int! - 1]
+                    attractions.append(attraction)
+                }
+                for hotelID in hotelIDs {
+                    let data = hotelID.1
+                    let hotel = Item.shared.hotels[data.int! - 1]
+                    hotels.append(hotel)
+                }
+                self.hotels = hotels
+                self.attractions = attractions
+            }
         }
     }
     

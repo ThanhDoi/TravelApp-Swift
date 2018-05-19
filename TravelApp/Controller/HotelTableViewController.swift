@@ -12,6 +12,7 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var hotels: [Hotel] = []
     var searchResults: [Hotel] = []
+    var trip: Trip?
     var alert = UIAlertController()
     var isWaiting = false
     var isWrong = false
@@ -45,6 +46,28 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
             }
             self.hotels = hotels
             self.tableView.reloadData()
+        }
+        
+        if let trip = trip {
+            reloadVisitedData(trip: trip) {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func reloadVisitedData(trip: Trip, completion: @escaping ()-> Void) {
+        APIConnect.shared.requestAPI(urlRequest: Router.getItemsInTrip(trip.id)) { (isSuccess, json) in
+            if isSuccess {
+                var hotels = [Hotel]()
+                let hotelIDs = json["hotels"]
+                for hotelID in hotelIDs {
+                    let data = hotelID.1
+                    let hotel = Item.shared.hotels[data.int! - 1]
+                    hotels.append(hotel)
+                }
+                self.hotels = hotels
+                completion()
+            }
         }
     }
     
@@ -129,9 +152,6 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
         // Configure the cell...
         let hotel = searchController.isActive ? searchResults[indexPath.row] : hotels[indexPath.row]
         cell.hotelNameLabel.text = hotel.name
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "EEE, MMM dd YYYY"
         cell.hotelLocationLabel.text = hotel.location
         if hotel.img == nil {
             if hotel.img_url.isEmpty == false {
@@ -161,6 +181,7 @@ class HotelTableViewController: UITableViewController, UISearchResultsUpdating {
                 let destVC = segue.destination as! HotelDetailViewController
                 destVC.hotel = searchController.isActive ? searchResults[indexPath.row] : hotels[indexPath.row]
                 destVC.isRecommend = self.isRecommend
+                destVC.trip = trip
             }
         }
     }

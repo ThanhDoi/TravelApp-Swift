@@ -8,22 +8,37 @@
 
 import UIKit
 import NotificationBannerSwift
+import DropDown
 
-class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
-    var rating: Int!
-    var recommendRating: Int!
-    var valueText = NSMutableAttributedString()
-    var isRecommend = false
-    var isRatedRecommend = false
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var favoriteButton: UIButton!
+    var rating: Int!
+    var recommendRating: Int!
+    var valueText = NSMutableAttributedString()
+    var isRecommend = false {
+        didSet {
+            if isRecommend {
+                numberOfRows = 7
+            } else {
+                numberOfRows = 8
+            }
+        }
+    }
+    var isRatedRecommend = false
     var hotel: Hotel!
     var banner: StatusBarNotificationBanner?
+    var numberOfRows = 0
+    var isAddingTrip = false
+    var isNone = false
+    var valueTextField: UITextField!
+    var datePicker : UIDatePicker!
+    var trip: Trip?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,15 +64,131 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
             }
             return ratingCell
         case 3:
+            if !isRecommend {
+                let selectTripCell = tableView.dequeueReusableCell(withIdentifier: "SelectTripCell", for: indexPath) as! SelectTripTableViewCell
+                selectTripCell.backgroundColor = UIColor.clear
+                selectTripCell.fieldLabel.text = "Trip"
+                selectTripCell.valueTextField.isHidden = true
+                var dataSource = [String]()
+                if let trip = trip {
+                    dataSource = ["None"]
+                    selectTripCell.button.setTitle(trip.name, for: .normal)
+                } else {
+                    dataSource.append(contentsOf: ["None", "Add a new Trip"])
+                    for eachTrip in Item.shared.visitedTrips {
+                        dataSource.append(eachTrip.name)
+                    }
+                }
+                selectTripCell.ButtonHandler = {
+                    let dropDown = DropDown()
+                    dropDown.anchorView = selectTripCell.button.plainView
+                    dropDown.dataSource = dataSource
+                    dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+                        selectTripCell.button.setTitle(item, for: .normal)
+                        if index == 0 {
+                            if let trip = self.trip {
+                                self.removeHotelFromTrip(trip: trip)
+                            }
+                            self.isNone = true
+                            self.doUpdate(indexPath: indexPath)
+                        }
+                        else if index == 1 {
+                            self.isNone = false
+                            self.isAddingTrip = true
+                            self.doUpdate(indexPath: indexPath)
+                        } else {
+                            self.addHotelToTrip(index: index)
+                        }
+                    }
+                    dropDown.show()
+                }
+                return selectTripCell
+            }
             cell.fieldLabel.text = "Location"
             cell.valueLabel.text = hotel.location
         case 4:
+            if isAddingTrip {
+                let selectTripCell = tableView.dequeueReusableCell(withIdentifier: "SelectTripCell", for: indexPath) as! SelectTripTableViewCell
+                selectTripCell.backgroundColor = UIColor.clear
+                selectTripCell.button.isHidden = true
+                selectTripCell.fieldLabel.text = "Trip Name"
+                selectTripCell.fieldLabel.isHidden = false
+                selectTripCell.valueTextField.placeholder = "Enter trip name"
+                selectTripCell.valueTextField.isHidden = false
+                return selectTripCell
+            }
+            if !isRecommend {
+                cell.fieldLabel.text = "Location"
+                cell.valueLabel.text = hotel.location
+            } else {
+                cell.fieldLabel.text = "Price"
+                cell.valueLabel.text = hotel.price
+            }
+        case 5:
+            if isAddingTrip {
+                let selectTripCell = tableView.dequeueReusableCell(withIdentifier: "SelectTripCell", for: indexPath) as! SelectTripTableViewCell
+                selectTripCell.backgroundColor = UIColor.clear
+                selectTripCell.button.isHidden = true
+                selectTripCell.fieldLabel.text = "Start Date"
+                selectTripCell.fieldLabel.isHidden = false
+                selectTripCell.valueTextField.placeholder = "Enter start date"
+                selectTripCell.valueTextField.isHidden = false
+                selectTripCell.valueTextField.delegate = self
+                return selectTripCell
+            }
+            if !isRecommend {
+                cell.fieldLabel.text = "Price"
+                cell.valueLabel.text = hotel.price
+            } else {
+                cell.fieldLabel.text = "Star"
+                cell.valueLabel.text = hotel.star
+            }
+        case 6:
+            if isAddingTrip {
+                let selectTripCell = tableView.dequeueReusableCell(withIdentifier: "SelectTripCell", for: indexPath) as! SelectTripTableViewCell
+                selectTripCell.backgroundColor = UIColor.clear
+                selectTripCell.button.isHidden = true
+                selectTripCell.fieldLabel.text = "End Date"
+                selectTripCell.fieldLabel.isHidden = false
+                selectTripCell.valueTextField.placeholder = "Enter end date"
+                selectTripCell.valueTextField.isHidden = false
+                selectTripCell.valueTextField.delegate = self
+                return selectTripCell
+            }
+            if !isRecommend {
+                cell.fieldLabel.text = "Star"
+                cell.valueLabel.text = hotel.star
+            } else {
+                cell.fieldLabel.text = "Features"
+                cell.valueLabel.text = hotel.features
+            }
+        case 7:
+            if isAddingTrip {
+                let selectTripCell = tableView.dequeueReusableCell(withIdentifier: "SelectTripCell", for: indexPath) as! SelectTripTableViewCell
+                selectTripCell.backgroundColor = UIColor.clear
+                selectTripCell.valueTextField.isHidden = true
+                selectTripCell.fieldLabel.isHidden = true
+                selectTripCell.button.setTitle("Create new trip", for: .normal)
+                selectTripCell.button.isHidden = false
+                selectTripCell.ButtonHandler = {
+                    self.createNewTrip(indexPath: indexPath)
+                }
+                return selectTripCell
+            }
+            if !isRecommend {
+                cell.fieldLabel.text = "Features"
+                cell.valueLabel.text = hotel.features
+            }
+        case 8:
+            cell.fieldLabel.text = "Location"
+            cell.valueLabel.text = hotel.location
+        case 9:
             cell.fieldLabel.text = "Price"
             cell.valueLabel.text = hotel.price
-        case 5:
+        case 10:
             cell.fieldLabel.text = "Star"
             cell.valueLabel.text = hotel.star
-        case 6:
+        case 11:
             cell.fieldLabel.text = "Features"
             cell.valueLabel.text = hotel.features
         default:
@@ -68,6 +199,65 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
         cell.backgroundColor = UIColor.clear
         
         return cell
+    }
+    
+    func removeHotelFromTrip(trip: Trip) {
+        APIConnect.shared.requestAPI(urlRequest: Router.removeHotelFromTrip(trip.id, hotel.id)) { (isSuccess, json) in
+            if isSuccess {
+                let banner = StatusBarNotificationBanner(title: "Removed from trip", style: .success)
+                banner.show()
+            }
+        }
+    }
+    
+    func addHotelToTrip(index: Int) {
+        let visitedTrip = Item.shared.visitedTrips[index - 2]
+        APIConnect.shared.requestAPI(urlRequest: Router.addHotelToTrip(visitedTrip.id, hotel.id)) { (isSuccess, json) in
+            if isSuccess {
+                let banner = StatusBarNotificationBanner(title: "Added to Trip", style: .success)
+                banner.show()
+            }
+        }
+    }
+    
+    func createNewTrip(indexPath: IndexPath) {
+        let tripNameCell = tableView.cellForRow(at: IndexPath(row: indexPath.row - 3, section: indexPath.section)) as! SelectTripTableViewCell
+        let startDateCell = tableView.cellForRow(at: IndexPath(row: indexPath.row - 2, section: indexPath.section)) as! SelectTripTableViewCell
+        let endDateCell = tableView.cellForRow(at: IndexPath(row: indexPath.row - 1, section: indexPath.section)) as! SelectTripTableViewCell
+        let tripName = tripNameCell.valueTextField.text
+        var startDate = startDateCell.valueTextField.text
+        var endDate = endDateCell.valueTextField.text
+        if tripName == "" || startDate == "" || endDate == "" {
+            let alertController = createAlertController(title: "Oops", mesage: "We can't proceed because one of the fields is blank. Please note that all fields are required.")
+            present(alertController, animated: true, completion: nil)
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.dateFormat = "MMM d, yyyy"
+            let startDay = dateFormatter.date(from: startDate!)
+            let endDay = dateFormatter.date(from: endDate!)
+            dateFormatter.dateFormat = "YYYY-MM-dd"
+            startDate = dateFormatter.string(from: startDay!)
+            endDate = dateFormatter.string(from: endDay!)
+            
+            APIConnect.shared.requestAPI(urlRequest: Router.createTripByHotel(tripName!, startDate!, endDate!, hotel.id)) { (isSuccess, json) in
+                if isSuccess {
+                    let banner = StatusBarNotificationBanner(title: "Added new trip", style: .success)
+                    banner.show()
+                    self.hideAddingTripFields(indexPath: indexPath)
+                }
+            }
+        }
+    }
+    
+    func hideAddingTripFields(indexPath: IndexPath) {
+        isAddingTrip = false
+        let range = indexPath.row-3...indexPath.row
+        let indexPaths = range.map { return IndexPath(row: $0, section: indexPath.section) }
+        tableView.beginUpdates()
+        numberOfRows = numberOfRows - 4
+        tableView.deleteRows(at: indexPaths, with: .automatic)
+        tableView.endUpdates()
     }
     
     func doRate(rating: Double) {
@@ -169,6 +359,64 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
             banner.show()
             favoriteButton.setImage(#imageLiteral(resourceName: "removefav"), for: .normal)
         }
+    }
+    
+    func doUpdate(indexPath: IndexPath) {
+        let range = indexPath.row+1...indexPath.row+4
+        let indexPaths = range.map { return IndexPath(row: $0, section: indexPath.section) }
+        tableView.beginUpdates()
+        if isAddingTrip {
+            if isNone {
+                numberOfRows = numberOfRows - 4
+                tableView.deleteRows(at: indexPaths, with: .automatic)
+                isAddingTrip = false
+            } else {
+                numberOfRows += 4
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            }
+        }
+        tableView.endUpdates()
+    }
+    
+    func pickUpDate(_ textField : UITextField) {
+        
+        // DatePicker
+        self.datePicker = UIDatePicker(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 216))
+        self.datePicker.backgroundColor = UIColor.white
+        self.datePicker.datePickerMode = UIDatePickerMode.date
+        textField.inputView = self.datePicker
+        
+        // ToolBar
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancelClick))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        textField.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneClick() {
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateStyle = .medium
+        dateFormatter1.timeStyle = .none
+        valueTextField.text = dateFormatter1.string(from: datePicker.date)
+        valueTextField.resignFirstResponder()
+    }
+    
+    @objc func cancelClick() {
+        valueTextField.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        valueTextField = textField
+        self.pickUpDate(valueTextField)
     }
     
 }

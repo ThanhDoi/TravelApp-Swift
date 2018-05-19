@@ -21,6 +21,7 @@ public enum Router: URLRequestConvertible {
     
     case getHotels
     case getAttractions
+    case getVisitedItems
     
     case changeInfo(String, String)
     
@@ -28,7 +29,6 @@ public enum Router: URLRequestConvertible {
     case getHotelAvgRating(Int)
     case rateHotel(Int, Int)
     case rateHotelRecommend(Int, Int)
-    case getVisitedHotels
     
     case checkConnection
     
@@ -36,11 +36,18 @@ public enum Router: URLRequestConvertible {
     case getAttractionAvgRating(Int)
     case rateAttraction(Int, Int)
     case rateAttractionRecommend(Int, Int)
-    case getVisitedAttractions
+    
+    case createTripByHotel(String, String, String, Int)
+    case createTripByAttraction(String, String, String, Int)
+    case getItemsInTrip(Int)
+    case addHotelToTrip(Int, Int)
+    case addAttractionToTrip(Int, Int)
+    case removeHotelFromTrip(Int, Int)
+    case removeAttractionFromTrip(Int, Int)
     
     var method: HTTPMethod {
         switch self {
-        case .login, .signup, .rateHotel, .rateHotelRecommend, .rateAttraction, .rateAttractionRecommend:
+        case .login, .signup, .rateHotel, .rateHotelRecommend, .rateAttraction, .rateAttractionRecommend, .createTripByHotel, .createTripByAttraction, .addHotelToTrip, .addAttractionToTrip, .removeHotelFromTrip, .removeAttractionFromTrip:
             return .post
         case .changeInfo:
             return .put
@@ -57,6 +64,8 @@ public enum Router: URLRequestConvertible {
             return "/hotels"
         case .signup:
             return "/register"
+        case .getVisitedItems:
+            return "/users/visitedItems"
             
         case .changeInfo:
             return "/users/"
@@ -72,9 +81,7 @@ public enum Router: URLRequestConvertible {
             return "/hotels/\(hotelID)/rate"
         case .rateHotelRecommend(let hotelID, _):
             return "/hotels/\(hotelID)/rateRecommend"
-        case .getVisitedHotels:
-            return "/users/visitedHotels"
-            
+       
         case .checkConnection:
             return "/checkConnect"
             
@@ -86,6 +93,22 @@ public enum Router: URLRequestConvertible {
             return "/attractions/\(attractionID)/rate"
         case .rateAttractionRecommend(let attractionID, _):
             return "/attractions/\(attractionID)/rateRecommend"
+            
+        case .createTripByHotel:
+            return "/trips/createTripByHotel"
+        case .createTripByAttraction:
+            return "/trips/createTripByAttraction"
+        case .getItemsInTrip(let tripID):
+            return "/trips/\(tripID)/getItemsInTrip"
+        case .addHotelToTrip(let tripID, _):
+            return "/trips/\(tripID)/addHotel"
+        case .addAttractionToTrip(let tripID, _):
+            return "/trips/\(tripID)/addAttraction"
+        case .removeHotelFromTrip(let tripID, _):
+            return "/trips/\(tripID)/removeHotel"
+        case .removeAttractionFromTrip(let tripID, _):
+            return "/trips/\(tripID)/removeAttraction"
+            
         default:
             return "/"
         }
@@ -111,6 +134,18 @@ public enum Router: URLRequestConvertible {
             return ["rate": rate]
         case .rateAttractionRecommend(_, let rate):
             return ["rate": rate]
+        case .createTripByHotel(let tripName, let tripStartDate, let tripEndDate, let hotelID):
+            return ["trip_name": tripName, "start_date": tripStartDate, "end_date": tripEndDate, "hotel_id": hotelID]
+        case .createTripByAttraction(let tripName, let tripStartDate, let tripEndDate, let attractionID):
+            return ["trip_name": tripName, "start_date": tripStartDate, "end_date": tripEndDate, "attraction_id": attractionID]
+        case .addHotelToTrip(_, let hotelID):
+            return ["hotel_id": hotelID]
+        case .addAttractionToTrip(_, let hotelID):
+            return ["hotel_id": hotelID]
+        case .removeHotelFromTrip(_, let hotelID):
+            return ["hotel_id": hotelID]
+        case .removeAttractionFromTrip(_, let hotelID):
+            return ["hotel_id": hotelID]
         default:
             return [:]
         }

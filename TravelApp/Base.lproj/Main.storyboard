@@ -398,10 +398,13 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <segue destination="M7d-8G-pSj" kind="show" identifier="showVisitedItems" id="lIY-eL-h4c"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oiH-rt-OHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="704.79999999999995" y="10.344827586206897"/>
+            <point key="canvasLocation" x="705" y="11"/>
         </scene>
         <!--City Selection Table View Controller-->
         <scene sceneID="xRc-JS-Ygo">
@@ -661,6 +664,65 @@
             </objects>
             <point key="canvasLocation" x="1644" y="2338"/>
         </scene>
+        <!--TRIP-->
+        <scene sceneID="TvJ-lW-N99">
+            <objects>
+                <tableViewController id="QkI-K2-pb4" customClass="TripTableViewController" customModule="TravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Q3-1j-3aR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="80" id="GJT-Oj-nbN" customClass="TripTableViewCell" customModule="TravelApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GJT-Oj-nbN" id="cp4-lF-ZQq">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="N87-1S-w8V">
+                                            <rect key="frame" x="16" y="8" width="343" height="63.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyK-62-b35">
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="32"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-sz-36U">
+                                                    <rect key="frame" x="0.0" y="32" width="343" height="31.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="N87-1S-w8V" firstAttribute="leading" secondItem="cp4-lF-ZQq" secondAttribute="leading" constant="16" id="PY3-gR-QPy"/>
+                                        <constraint firstAttribute="trailing" secondItem="N87-1S-w8V" secondAttribute="trailing" constant="16" id="cfb-oh-E0k"/>
+                                        <constraint firstItem="N87-1S-w8V" firstAttribute="top" secondItem="cp4-lF-ZQq" secondAttribute="top" constant="8" id="rjR-sD-n6W"/>
+                                        <constraint firstAttribute="bottom" secondItem="N87-1S-w8V" secondAttribute="bottom" constant="8" id="z07-1m-Tnz"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="durationLabel" destination="cg9-sz-36U" id="6rK-UE-Y1S"/>
+                                    <outlet property="nameLabel" destination="XyK-62-b35" id="L6j-0y-SOc"/>
+                                    <segue destination="nta-29-M9o" kind="show" identifier="showTripDetail" id="GiF-cv-ETR"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QkI-K2-pb4" id="F5P-T1-iL1"/>
+                            <outlet property="delegate" destination="QkI-K2-pb4" id="Ttc-dP-gQj"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="TRIP" id="Q8h-u7-f0M"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dUO-VO-daZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="705" y="3125"/>
+        </scene>
         <!--Attraction Detail View Controller-->
         <scene sceneID="I7B-vM-U5W">
             <objects>
@@ -746,6 +808,55 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cosmosView" destination="L23-DW-cum" id="Kc9-Fg-yy5"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectTripCell" id="7Gp-Ol-Y1h" customClass="SelectTripTableViewCell" customModule="TravelApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="428" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Gp-Ol-Y1h" id="P1J-RR-bx1">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4L-US-nSh">
+                                                    <rect key="frame" x="16" y="8" width="343" height="33.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8s9-G4-1df">
+                                                            <rect key="frame" x="0.0" y="0.0" width="68.5" height="33.5"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M2n-kp-NEe">
+                                                            <rect key="frame" x="68.5" y="0.0" width="137" height="33.5"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LIS-K2-v7y">
+                                                            <rect key="frame" x="205.5" y="0.0" width="137.5" height="33.5"/>
+                                                            <state key="normal" title="Select Trip"/>
+                                                            <connections>
+                                                                <action selector="buttonTapped:" destination="7Gp-Ol-Y1h" eventType="touchUpInside" id="M1c-yB-tQG"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="8s9-G4-1df" firstAttribute="width" secondItem="M2n-kp-NEe" secondAttribute="width" multiplier="1:2" id="8hQ-EI-PHl"/>
+                                                        <constraint firstItem="8s9-G4-1df" firstAttribute="width" secondItem="LIS-K2-v7y" secondAttribute="width" multiplier="1:2" id="YU4-oF-y82"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="u4L-US-nSh" firstAttribute="top" secondItem="P1J-RR-bx1" secondAttribute="top" constant="8" id="GnJ-pI-q44"/>
+                                                <constraint firstAttribute="bottom" secondItem="u4L-US-nSh" secondAttribute="bottom" constant="8" id="YTY-Xy-17B"/>
+                                                <constraint firstAttribute="trailing" secondItem="u4L-US-nSh" secondAttribute="trailing" constant="16" id="esq-H4-Kkv"/>
+                                                <constraint firstItem="u4L-US-nSh" firstAttribute="leading" secondItem="P1J-RR-bx1" secondAttribute="leading" constant="16" id="tf6-u1-xie"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="LIS-K2-v7y" id="OVu-TB-YcD"/>
+                                            <outlet property="fieldLabel" destination="8s9-G4-1df" id="ovb-qF-iBO"/>
+                                            <outlet property="valueTextField" destination="M2n-kp-NEe" id="P1Z-7E-Nr7"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -872,6 +983,56 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cosmosView" destination="gCF-3x-JSK" id="3oY-PV-a3n"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectTripCell" rowHeight="50" id="a4M-or-8Xg" customClass="SelectTripTableViewCell" customModule="TravelApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="428" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a4M-or-8Xg" id="KoY-wu-RHo">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRq-l6-aeD">
+                                                    <rect key="frame" x="16" y="8" width="343" height="33.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMD-DS-V2S">
+                                                            <rect key="frame" x="0.0" y="0.0" width="69" height="33.5"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XEo-2y-kLb">
+                                                            <rect key="frame" x="69" y="0.0" width="137.5" height="33.5"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xzh-eY-fAN">
+                                                            <rect key="frame" x="206.5" y="0.0" width="136.5" height="33.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <state key="normal" title="Select Trip"/>
+                                                            <connections>
+                                                                <action selector="buttonTapped:" destination="a4M-or-8Xg" eventType="touchUpInside" id="xYK-z3-MJ6"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="LMD-DS-V2S" firstAttribute="width" secondItem="Xzh-eY-fAN" secondAttribute="width" multiplier="1:2" id="mZn-zZ-9w9"/>
+                                                        <constraint firstItem="LMD-DS-V2S" firstAttribute="width" secondItem="XEo-2y-kLb" secondAttribute="width" multiplier="1:2" id="u14-73-z9H"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="XRq-l6-aeD" firstAttribute="top" secondItem="KoY-wu-RHo" secondAttribute="top" constant="8" id="bRV-4g-pXz"/>
+                                                <constraint firstAttribute="trailing" secondItem="XRq-l6-aeD" secondAttribute="trailing" constant="16" id="cCh-f3-miY"/>
+                                                <constraint firstItem="XRq-l6-aeD" firstAttribute="leading" secondItem="KoY-wu-RHo" secondAttribute="leading" constant="16" id="p9L-L8-azY"/>
+                                                <constraint firstAttribute="bottom" secondItem="XRq-l6-aeD" secondAttribute="bottom" constant="8" id="w4h-bP-ku6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="Xzh-eY-fAN" id="eQ0-Jc-Fcl"/>
+                                            <outlet property="fieldLabel" destination="LMD-DS-V2S" id="wLR-BF-a5x"/>
+                                            <outlet property="valueTextField" destination="XEo-2y-kLb" id="cts-mi-P2v"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1196,6 +1357,26 @@
             </objects>
             <point key="canvasLocation" x="704.79999999999995" y="1575.5622188905547"/>
         </scene>
+        <!--Visited Item Tab Bar Controller-->
+        <scene sceneID="ojZ-MR-iZ1">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="M7d-8G-pSj" customClass="VisitedItemTabBarController" customModule="TravelApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ppl-PL-ESc">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="QkI-K2-pb4" kind="relationship" relationship="viewControllers" id="cN6-HA-sO4"/>
+                        <segue destination="9VM-Np-Y6I" kind="relationship" relationship="viewControllers" id="39X-6z-ICp"/>
+                        <segue destination="9n3-8n-4ug" kind="relationship" relationship="viewControllers" id="Gkh-Kv-Xkj"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hjh-mB-lKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-970" y="3125"/>
+        </scene>
     </scenes>
     <resources>
         <image name="account" width="24" height="24"/>
@@ -1211,8 +1392,10 @@
         <image name="mainVCweather" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Gsc-WI-qTq"/>
+        <segue reference="GiF-cv-ETR"/>
         <segue reference="Xc7-lb-dKD"/>
+        <segue reference="Gkh-Kv-Xkj"/>
+        <segue reference="39X-6z-ICp"/>
         <segue reference="nsK-91-ZG0"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -3,6 +3,7 @@ PODS:
   - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
   - Cosmos (16.0.0)
+  - DropDown (2.3.2)
   - ForecastIO (5.0.0)
   - MarqueeLabel/Swift (3.1.4)
   - NotificationBannerSwift (1.6.2):
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.7)
   - AlamofireImage (~> 3.3)
   - Cosmos (~> 16.0)
+  - DropDown
   - ForecastIO
   - NotificationBannerSwift
   - SwiftyJSON (~> 4.0)
@@ -24,6 +26,7 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - Cosmos
+    - DropDown
     - ForecastIO
     - MarqueeLabel
     - NotificationBannerSwift
@@ -34,12 +37,13 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   Cosmos: 7bcee0fa858a9355a214f2a181be5dffcee42c81
+  DropDown: 7f87abecc28f9b4edad810fe1211c5c018c257e5
   ForecastIO: 013d0110a0977712624973ceb425da1936b02acf
   MarqueeLabel: bf768455fe88d427f71476ebb23f9092b660f40b
   NotificationBannerSwift: 4eceb2add9d5eaa0596c63d49690b4d6476e74ec
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: c08ab990fb6975e9ef46b62925fc9f755db93ecc
+PODFILE CHECKSUM: 764cd0b53fbda2f43483ccb91be36bf4214efb56
 
 COCOAPODS: 1.5.2

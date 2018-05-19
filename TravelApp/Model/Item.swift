@@ -16,6 +16,7 @@ class Item {
     var attractions: [Attraction] = []
     var visitedHotels: [Hotel] = []
     var visitedAttractions: [Attraction] = []
+    var visitedTrips: [Trip] = []
     var bookmarkedHotels: [Int] = []
     var bookmarkedAttractions: [Int] = []
     

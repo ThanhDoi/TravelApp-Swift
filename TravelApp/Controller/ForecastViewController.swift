@@ -66,11 +66,11 @@ class ForecastViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(doSomething), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
     
-    @objc func doSomething(refreshControl: UIRefreshControl) {
+    @objc func refreshTable(refreshControl: UIRefreshControl) {
         getForecast(latitude: latitude, longitude: longitude) {
             self.tableView.reloadData()
         }
@@ -105,7 +105,6 @@ class ForecastViewController: UITableViewController {
         dateFormatter.dateFormat = "EEE, MMM dd"
         cell.dateLabel.text = dateFormatter.string(from: weatherData.time)
         cell.tempLabel.text = String(format: "%.1f", weatherData.temperatureHigh!) + " | " + String(format: "%.1f", weatherData.temperatureLow!)
-        
         
         return cell
     }

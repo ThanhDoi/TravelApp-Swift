@@ -12,6 +12,7 @@ class AttractionTableViewController: UITableViewController, UISearchResultsUpdat
     
     var attractions: [Attraction] = []
     var searchResults: [Attraction] = []
+    var trip: Trip?
     var alert = UIAlertController()
     var isWaiting = false
     var isWrong = false
@@ -44,6 +45,28 @@ class AttractionTableViewController: UITableViewController, UISearchResultsUpdat
             }
             self.attractions = attractions
             self.tableView.reloadData()
+        }
+        
+        if let trip = trip {
+            reloadVisitedData(trip: trip) {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func reloadVisitedData(trip: Trip, completion: @escaping ()-> Void) {
+        APIConnect.shared.requestAPI(urlRequest: Router.getItemsInTrip(trip.id)) { (isSuccess, json) in
+            if isSuccess {
+                var attractions = [Attraction]()
+                let attractionIDs = json["attractions"]
+                for attractionID in attractionIDs {
+                    let data = attractionID.1
+                    let attraction = Item.shared.attractions[data.int! - 1]
+                    attractions.append(attraction)
+                }
+                self.attractions = attractions
+                completion()
+            }
         }
     }
     
@@ -140,6 +163,7 @@ class AttractionTableViewController: UITableViewController, UISearchResultsUpdat
                 let destVC = segue.destination as! AttractionDetailViewController
                 destVC.attraction = searchController.isActive ? searchResults[indexPath.row] : attractions[indexPath.row]
                 destVC.isRecommend = self.isRecommend
+                destVC.trip = self.trip
             }
         }
     }

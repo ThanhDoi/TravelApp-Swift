@@ -14,6 +14,7 @@ class CitySelectionTableViewController: UITableViewController, UISearchResultsUp
     var searchResults: [String] = []
     var isForecast = true
     var cityID = 0
+    var searchController: UISearchController!
     
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text {
@@ -28,8 +29,6 @@ class CitySelectionTableViewController: UITableViewController, UISearchResultsUp
             return isMatch
         })
     }
-    
-    var searchController: UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()

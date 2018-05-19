@@ -18,6 +18,8 @@ class MainVC: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        //        RunFirst.shared.getVisitedItems {
+        //        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -26,9 +28,8 @@ class MainVC: UITableViewController {
     }
     
     @IBAction func showVisitedHotelButtonTapped(_ sender: UIBarButtonItem) {
-        Item.shared.visitedHotels.removeAll()
-        RunFirst.shared.getVisitedHotels {
-            self.performSegue(withIdentifier: "showVisitedHotelsSegue", sender: self)
+        RunFirst.shared.getVisitedItems {
+            self.performSegue(withIdentifier: "showVisitedItems", sender: self)
         }
     }
     
@@ -38,12 +39,6 @@ class MainVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "showAllHotelSegue" {
-            if let destVC = segue.destination as? TabBarController {
-                destVC.hotels = Item.shared.hotels
-            }
-        }
-        
         if segue.identifier == "showCityToRecommend" {
             if let destVC = segue.destination as? CitySelectionTableViewController {
                 destVC.isForecast = false
@@ -58,6 +53,10 @@ class MainVC: UITableViewController {
         
         if segue.identifier == "showSearchSegue" {
             if let destVC = segue.destination as? TabBarController {
+                RunFirst.shared.getVisitedItems {
+                }
+                destVC.hotels = Item.shared.hotels
+                destVC.attractions = Item.shared.attractions
                 destVC.selectedIndex = 0
                 destVC.tabBar(destVC.tabBar, didSelect: destVC.tabBar.items![0])
             }
@@ -65,7 +64,19 @@ class MainVC: UITableViewController {
         
         if segue.identifier == "showBookmarkedItems" {
             if let destVC = segue.destination as? TabBarController {
+                RunFirst.shared.getVisitedItems {
+                }
                 destVC.isBookmark = true
+                destVC.selectedIndex = 0
+                destVC.tabBar(destVC.tabBar, didSelect: destVC.tabBar.items![0])
+            }
+        }
+        
+        if segue.identifier == "showVisitedItems" {
+            if let destVC = segue.destination as? VisitedItemTabBarController {
+                destVC.hotels = Item.shared.visitedHotels
+                destVC.attractions = Item.shared.visitedAttractions
+                destVC.trips = Item.shared.visitedTrips
                 destVC.selectedIndex = 0
                 destVC.tabBar(destVC.tabBar, didSelect: destVC.tabBar.items![0])
             }

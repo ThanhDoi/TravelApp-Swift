@@ -40,12 +40,15 @@ class RunFirst {
         }
     }
     
-    func getVisitedHotels(completion: @escaping (() -> Void)) {
-        APIConnect.shared.requestAPI(urlRequest: Router.getVisitedHotels) { (isSuccess, json) in
+    func getVisitedItems(completion: @escaping (() -> Void)) {
+        Item.shared.visitedHotels.removeAll()
+        Item.shared.visitedAttractions.removeAll()
+        Item.shared.visitedTrips.removeAll()
+        APIConnect.shared.requestAPI(urlRequest: Router.getVisitedItems) { (isSuccess, json) in
             if isSuccess {
-                let results = json["data"]
-                for result in results {
-                    let data = result.1
+                let visitedHotels = json["visited_hotels"]
+                for eachHotel in visitedHotels {
+                    let data = eachHotel.1
                     let hotelID = data["hotel_id"].int
                     let dateString = data["created_at"].string
                     let dateFormatter = DateFormatter()
@@ -55,6 +58,29 @@ class RunFirst {
                     let hotel = Item.shared.hotels[hotelID! - 1]
                     hotel.visitedDate = date
                     Item.shared.visitedHotels.append(hotel)
+                }
+                let visitedAttractions = json["visited_attractions"]
+                for eachAttraction in visitedAttractions {
+                    let data = eachAttraction.1
+                    let attractionID = data["attraction_id"].int
+                    let dateString = data["created_at"].string
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let date = dateFormatter.date(from: dateString!)
+                    let attraction = Item.shared.attractions[attractionID! - 1]
+                    attraction.visitedDate = date
+                    Item.shared.visitedAttractions.append(attraction)
+                }
+                let visitedTrips = json["visited_trips"]
+                for eachTrip in visitedTrips {
+                    let data = eachTrip.1
+                    let tripID = data["id"].int
+                    let tripName = data["name"].string
+                    let startDate = data["start_date"].string
+                    let endDate = data["end_date"].string
+                    let trip = Trip(id: tripID!, name: tripName!, startDate: startDate!, endDate: endDate!)
+                    Item.shared.visitedTrips.append(trip)
                 }
                 DispatchQueue.main.async {
                     completion()

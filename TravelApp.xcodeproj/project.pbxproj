@@ -27,6 +27,9 @@
 		C07190CD209B79A9005FECFC /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07190CC209B79A9005FECFC /* ForecastViewController.swift */; };
 		C07C44E820948491007F9AA4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C44E720948491007F9AA4 /* SignUpViewController.swift */; };
 		C07CC893209CF0740018E647 /* RunFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CC892209CF0740018E647 /* RunFirst.swift */; };
+		C08672BD20B008690068200C /* VisitedItemTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08672BC20B008690068200C /* VisitedItemTabBarController.swift */; };
+		C08672BF20B0099D0068200C /* TripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08672BE20B0099D0068200C /* TripTableViewController.swift */; };
+		C08672C120B00A7F0068200C /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08672C020B00A7F0068200C /* TripTableViewCell.swift */; };
 		C09DC1FF209342E6001C441D /* APIConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09DC1FE209342E6001C441D /* APIConnect.swift */; };
 		C0C0606B209A53E300EF8A69 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0606A209A53E300EF8A69 /* MainVC.swift */; };
 		C0C108E420A0B6F100D65D99 /* HotelDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C108E320A0B6F100D65D99 /* HotelDetailViewController.swift */; };
@@ -38,6 +41,8 @@
 		C0F1538120ADE34200E62A0B /* Attraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F1538020ADE34200E62A0B /* Attraction.swift */; };
 		C0F1538320ADEF6400E62A0B /* AttractionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F1538220ADEF6400E62A0B /* AttractionTableViewCell.swift */; };
 		C0F38EFD20A1BE08007265C9 /* CitySelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F38EFC20A1BE08007265C9 /* CitySelectionTableViewController.swift */; };
+		C0FA8C3F20AF59EA00D2E2B3 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FA8C3E20AF59EA00D2E2B3 /* Trip.swift */; };
+		C0FA8C4120AF5F5D00D2E2B3 /* SelectTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FA8C4020AF5F5D00D2E2B3 /* SelectTripTableViewCell.swift */; };
 		C0FC23DF209EBD3A005633E4 /* HotelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FC23DE209EBD3A005633E4 /* HotelTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +70,9 @@
 		C07190CC209B79A9005FECFC /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
 		C07C44E720948491007F9AA4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C07CC892209CF0740018E647 /* RunFirst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunFirst.swift; sourceTree = "<group>"; };
+		C08672BC20B008690068200C /* VisitedItemTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedItemTabBarController.swift; sourceTree = "<group>"; };
+		C08672BE20B0099D0068200C /* TripTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableViewController.swift; sourceTree = "<group>"; };
+		C08672C020B00A7F0068200C /* TripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableViewCell.swift; sourceTree = "<group>"; };
 		C09DC1FE209342E6001C441D /* APIConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConnect.swift; sourceTree = "<group>"; };
 		C0C0606A209A53E300EF8A69 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		C0C108E320A0B6F100D65D99 /* HotelDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelDetailViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +84,8 @@
 		C0F1538020ADE34200E62A0B /* Attraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attraction.swift; sourceTree = "<group>"; };
 		C0F1538220ADEF6400E62A0B /* AttractionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionTableViewCell.swift; sourceTree = "<group>"; };
 		C0F38EFC20A1BE08007265C9 /* CitySelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySelectionTableViewController.swift; sourceTree = "<group>"; };
+		C0FA8C3E20AF59EA00D2E2B3 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		C0FA8C4020AF5F5D00D2E2B3 /* SelectTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTripTableViewCell.swift; sourceTree = "<group>"; };
 		C0FC23DE209EBD3A005633E4 /* HotelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelTableViewCell.swift; sourceTree = "<group>"; };
 		EA22F6F839F73932A43A28CF /* Pods_TravelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -109,6 +119,7 @@
 				C03C00DA209F13B000C56018 /* Hotel.swift */,
 				C03C00DC209F155B00C56018 /* Item.swift */,
 				C0F1538020ADE34200E62A0B /* Attraction.swift */,
+				C0FA8C3E20AF59EA00D2E2B3 /* Trip.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,6 +182,8 @@
 				C0F1537C20ADBA0600E62A0B /* TabBarController.swift */,
 				C0F1537E20ADE32000E62A0B /* AttractionTableViewController.swift */,
 				C042739620AE8D6300B566B7 /* AttractionDetailViewController.swift */,
+				C08672BC20B008690068200C /* VisitedItemTabBarController.swift */,
+				C08672BE20B0099D0068200C /* TripTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -195,6 +208,8 @@
 				C0F1538220ADEF6400E62A0B /* AttractionTableViewCell.swift */,
 				C042739820AE8F2E00B566B7 /* AttractionDetailTableViewCell.swift */,
 				C03A9B0620AED36D004F4108 /* RatingTableViewCell.swift */,
+				C0FA8C4020AF5F5D00D2E2B3 /* SelectTripTableViewCell.swift */,
+				C08672C020B00A7F0068200C /* TripTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -304,6 +319,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
+				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/ForecastIO/ForecastIO.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
@@ -315,6 +331,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ForecastIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
@@ -333,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0FA8C4120AF5F5D00D2E2B3 /* SelectTripTableViewCell.swift in Sources */,
 				C021F81520A4689300B0AC6D /* Router.swift in Sources */,
 				C0C0606B209A53E300EF8A69 /* MainVC.swift in Sources */,
 				C0F1538120ADE34200E62A0B /* Attraction.swift in Sources */,
@@ -345,15 +363,19 @@
 				C09DC1FF209342E6001C441D /* APIConnect.swift in Sources */,
 				C013F77E2092D7A7001A9956 /* LoginViewController.swift in Sources */,
 				C03C00DB209F13B000C56018 /* Hotel.swift in Sources */,
+				C0FA8C3F20AF59EA00D2E2B3 /* Trip.swift in Sources */,
 				C03A9B0720AED36D004F4108 /* RatingTableViewCell.swift in Sources */,
 				C07CC893209CF0740018E647 /* RunFirst.swift in Sources */,
 				C0D99B2120A194340028D0E7 /* Constant.swift in Sources */,
+				C08672BF20B0099D0068200C /* TripTableViewController.swift in Sources */,
 				C013F7652092D36B001A9956 /* AppDelegate.swift in Sources */,
 				C03C00DD209F155B00C56018 /* Item.swift in Sources */,
+				C08672C120B00A7F0068200C /* TripTableViewCell.swift in Sources */,
 				C0F38EFD20A1BE08007265C9 /* CitySelectionTableViewController.swift in Sources */,
 				C042739920AE8F2E00B566B7 /* AttractionDetailTableViewCell.swift in Sources */,
 				C0CBA13620A0A25E00CE8927 /* HotelTableViewController.swift in Sources */,
 				C0075FF12099C45C000F885F /* User.swift in Sources */,
+				C08672BD20B008690068200C /* VisitedItemTabBarController.swift in Sources */,
 				C0CBA13420A09F4F00CE8927 /* HotelDetailTableViewCell.swift in Sources */,
 				C013F76D2092D36B001A9956 /* TravelApp.xcdatamodeld in Sources */,
 				C03C2C402095768F000C0774 /* AccountPopoverViewController.swift in Sources */,
@@ -506,7 +528,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TravelApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Thanh-Doi.TravelApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -521,7 +546,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TravelApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Thanh-Doi.TravelApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

@@ -18,6 +18,7 @@ class Attraction {
     var img: Data?
     var cityID = 0
     var diffWithAvgRating: Double!
+    var visitedDate: Date?
     
     init(id: Int, name: String, location: String, features: String, img_url: String, cityID: Int) {
         self.id = id

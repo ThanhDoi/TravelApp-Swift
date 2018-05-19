@@ -15,5 +15,6 @@ target 'TravelApp' do
         end
     end
     pod 'NotificationBannerSwift'
+    pod 'DropDown'
     
 end
