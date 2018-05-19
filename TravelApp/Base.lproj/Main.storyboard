@@ -586,7 +586,7 @@
                             <outlet property="delegate" destination="9VM-Np-Y6I" id="9yQ-Nu-RAZ"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="HOTEL" id="hoG-KY-Y33"/>
+                    <tabBarItem key="tabBarItem" title="HOTEL" image="hotel" id="hoG-KY-Y33"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4xc-VR-rNT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -658,7 +658,7 @@
                             <outlet property="delegate" destination="9n3-8n-4ug" id="DSm-f4-gBR"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="ATTRACTION" id="Kaj-Cg-FXI"/>
+                    <tabBarItem key="tabBarItem" title="ATTRACTION" image="attraction" id="Kaj-Cg-FXI"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDw-u3-pPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -717,7 +717,7 @@
                             <outlet property="delegate" destination="QkI-K2-pb4" id="Ttc-dP-gQj"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="TRIP" id="Q8h-u7-f0M"/>
+                    <tabBarItem key="tabBarItem" title="TRIP" image="trip" id="Q8h-u7-f0M"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUO-VO-daZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1381,18 +1381,21 @@
     <resources>
         <image name="account" width="24" height="24"/>
         <image name="accountVCbackgroud" width="300" height="250"/>
+        <image name="attraction" width="16" height="16"/>
         <image name="bookmark" width="24" height="24"/>
         <image name="close" width="24" height="24"/>
         <image name="default" width="128" height="128"/>
         <image name="favorite" width="24" height="24"/>
         <image name="history" width="24" height="24"/>
+        <image name="hotel" width="16" height="16"/>
         <image name="mainVCbackground" width="400" height="250"/>
         <image name="mainVCrecommend" width="32" height="32"/>
         <image name="mainVCsearch" width="32" height="32"/>
         <image name="mainVCweather" width="32" height="32"/>
+        <image name="trip" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RDt-0w-LH5"/>
+        <segue reference="GiF-cv-ETR"/>
         <segue reference="Xc7-lb-dKD"/>
         <segue reference="Gkh-Kv-Xkj"/>
         <segue reference="39X-6z-ICp"/>

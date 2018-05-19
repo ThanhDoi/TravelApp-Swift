@@ -14,6 +14,7 @@ class Trip {
     var name = ""
     var startDate: Date!
     var endDate: Date!
+    var duration = ""
     
     init(id: Int, name: String, startDate: String, endDate: String) {
         self.id = id
@@ -21,7 +22,9 @@ class Trip {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        self.startDate = dateFormatter.date(from: startDate)
-        self.endDate = dateFormatter.date(from: endDate)
+        self.startDate = dateFormatter.date(from: startDate)!
+        self.endDate = dateFormatter.date(from: endDate)!
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        self.duration = "From \(dateFormatter.string(from: self.startDate)) to \(dateFormatter.string(from: self.endDate))"
     }
 }

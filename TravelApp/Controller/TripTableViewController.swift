@@ -44,7 +44,7 @@ class TripTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.nameLabel.text = trips[indexPath.row].name
-        cell.durationLabel.text = "ABC"
+        cell.durationLabel.text = trips[indexPath.row].duration
 
         return cell
     }
