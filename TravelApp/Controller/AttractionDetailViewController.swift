@@ -72,7 +72,7 @@ class AttractionDetailViewController: UIViewController, UITableViewDelegate, UIT
                 selectTripCell.valueTextField.isHidden = true
                 var dataSource = [String]()
                 if let trip = trip {
-                    dataSource = ["None"]
+                    dataSource = ["Remove from this Trip"]
                     selectTripCell.button.setTitle(trip.name, for: .normal)
                 } else {
                     dataSource.append(contentsOf: ["None", "Add a new Trip"])
@@ -83,7 +83,7 @@ class AttractionDetailViewController: UIViewController, UITableViewDelegate, UIT
                 selectTripCell.ButtonHandler = {
                     let dropDown = DropDown()
                     dropDown.anchorView = selectTripCell.button.plainView
-                    dropDown.dataSource = ["None", "Add a new Trip"]
+                    dropDown.dataSource = dataSource
                     dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                         selectTripCell.button.setTitle(item, for: .normal)
                         if index == 0 {
@@ -114,8 +114,10 @@ class AttractionDetailViewController: UIViewController, UITableViewDelegate, UIT
                 selectTripCell.button.isHidden = true
                 selectTripCell.fieldLabel.text = "Trip Name"
                 selectTripCell.fieldLabel.isHidden = false
+                selectTripCell.valueTextField.text = ""
                 selectTripCell.valueTextField.placeholder = "Enter trip name"
                 selectTripCell.valueTextField.isHidden = false
+                selectTripCell.valueTextField.delegate = nil
                 return selectTripCell
             }
             if !isRecommend {
@@ -129,6 +131,7 @@ class AttractionDetailViewController: UIViewController, UITableViewDelegate, UIT
                 selectTripCell.button.isHidden = true
                 selectTripCell.fieldLabel.text = "Start Date"
                 selectTripCell.fieldLabel.isHidden = false
+                selectTripCell.valueTextField.text = ""
                 selectTripCell.valueTextField.placeholder = "Enter start date"
                 selectTripCell.valueTextField.isHidden = false
                 selectTripCell.valueTextField.delegate = self
@@ -141,6 +144,7 @@ class AttractionDetailViewController: UIViewController, UITableViewDelegate, UIT
                 selectTripCell.button.isHidden = true
                 selectTripCell.fieldLabel.text = "End Date"
                 selectTripCell.fieldLabel.isHidden = false
+                selectTripCell.valueTextField.text = ""
                 selectTripCell.valueTextField.placeholder = "Enter end date"
                 selectTripCell.valueTextField.isHidden = false
                 selectTripCell.valueTextField.delegate = self

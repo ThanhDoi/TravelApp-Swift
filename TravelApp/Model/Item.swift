@@ -24,4 +24,14 @@ class Item {
         
     }
     
+    func destroy() {
+        self.hotels.removeAll()
+        self.attractions.removeAll()
+        self.visitedTrips.removeAll()
+        self.visitedHotels.removeAll()
+        self.visitedAttractions.removeAll()
+        self.bookmarkedHotels.removeAll()
+        self.bookmarkedAttractions.removeAll()
+    }
+    
 }

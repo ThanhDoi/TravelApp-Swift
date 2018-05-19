@@ -44,6 +44,7 @@ public enum Router: URLRequestConvertible {
     case addAttractionToTrip(Int, Int)
     case removeHotelFromTrip(Int, Int)
     case removeAttractionFromTrip(Int, Int)
+    case deleteTrip(Int)
     
     var method: HTTPMethod {
         switch self {
@@ -51,6 +52,8 @@ public enum Router: URLRequestConvertible {
             return .post
         case .changeInfo:
             return .put
+        case .deleteTrip:
+            return .delete
         default:
             return .get
         }
@@ -108,6 +111,8 @@ public enum Router: URLRequestConvertible {
             return "/trips/\(tripID)/removeHotel"
         case .removeAttractionFromTrip(let tripID, _):
             return "/trips/\(tripID)/removeAttraction"
+        case .deleteTrip(let tripID):
+            return "/trips/\(tripID)"
             
         default:
             return "/"

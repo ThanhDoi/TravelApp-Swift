@@ -71,7 +71,7 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
                 selectTripCell.valueTextField.isHidden = true
                 var dataSource = [String]()
                 if let trip = trip {
-                    dataSource = ["None"]
+                    dataSource = ["Remove from this Trip"]
                     selectTripCell.button.setTitle(trip.name, for: .normal)
                 } else {
                     dataSource.append(contentsOf: ["None", "Add a new Trip"])
@@ -113,8 +113,10 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
                 selectTripCell.button.isHidden = true
                 selectTripCell.fieldLabel.text = "Trip Name"
                 selectTripCell.fieldLabel.isHidden = false
+                selectTripCell.valueTextField.text = ""
                 selectTripCell.valueTextField.placeholder = "Enter trip name"
                 selectTripCell.valueTextField.isHidden = false
+                selectTripCell.valueTextField.delegate = nil
                 return selectTripCell
             }
             if !isRecommend {
@@ -131,6 +133,7 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
                 selectTripCell.button.isHidden = true
                 selectTripCell.fieldLabel.text = "Start Date"
                 selectTripCell.fieldLabel.isHidden = false
+                selectTripCell.valueTextField.text = ""
                 selectTripCell.valueTextField.placeholder = "Enter start date"
                 selectTripCell.valueTextField.isHidden = false
                 selectTripCell.valueTextField.delegate = self
@@ -150,6 +153,7 @@ class HotelDetailViewController: UIViewController, UITableViewDelegate, UITableV
                 selectTripCell.button.isHidden = true
                 selectTripCell.fieldLabel.text = "End Date"
                 selectTripCell.fieldLabel.isHidden = false
+                selectTripCell.valueTextField.text = ""
                 selectTripCell.valueTextField.placeholder = "Enter end date"
                 selectTripCell.valueTextField.isHidden = false
                 selectTripCell.valueTextField.delegate = self

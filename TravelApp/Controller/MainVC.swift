@@ -18,8 +18,8 @@ class MainVC: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        //        RunFirst.shared.getVisitedItems {
-        //        }
+        RunFirst.shared.getHotels()
+        RunFirst.shared.getAttractions()
     }
     
     override func didReceiveMemoryWarning() {

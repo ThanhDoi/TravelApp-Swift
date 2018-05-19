@@ -48,6 +48,18 @@ class TripTableViewController: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let trip = trips[indexPath.row]
+            APIConnect.shared.requestAPI(urlRequest: Router.deleteTrip(trip.id)) { (isSuccess, json) in
+                self.trips.remove(at: indexPath.row)
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.tableView.endUpdates()
+            }
+        }
+    }
 
     // MARK: - Navigation
 

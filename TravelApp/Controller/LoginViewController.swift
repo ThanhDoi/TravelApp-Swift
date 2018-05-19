@@ -22,8 +22,6 @@ class LoginViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         configLayouts()
-        RunFirst.shared.getHotels()
-        RunFirst.shared.getAttractions()
     }
     
     func configLayouts() {

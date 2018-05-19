@@ -43,6 +43,7 @@ class User {
         UserDefaults.standard.removeObject(forKey: "UserId")
         UserDefaults.standard.removeObject(forKey: "bookmarkedHotels")
         UserDefaults.standard.removeObject(forKey: "bookmarkedAttractions")
+        Item.shared.destroy()
         self.name = nil
         self.email = nil
         self.apiToken = nil

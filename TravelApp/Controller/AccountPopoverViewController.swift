@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import NotificationBannerSwift
 
 class AccountPopoverViewController: UIViewController {
     
@@ -65,8 +66,8 @@ class AccountPopoverViewController: UIViewController {
                                 UserDefaults.standard.set(api_token, forKey: "UserApiToken")
                                 UserDefaults.standard.set(user_id, forKey: "UserId")
                                 User.shared.createUser()
-                                let alertController = createAlertController(title: "Done", mesage: "User info updated!")
-                                self.present(alertController, animated: true, completion: nil)
+                                let banner = StatusBarNotificationBanner(title: "Updated", style: .success)
+                                banner.show()
                                 self.reloadData()
                             }
                         } else {
