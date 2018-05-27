@@ -54,9 +54,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func forgotPasswordButtonTapped(_ sender: UIButton) {
-    }
-    
     @IBAction func signupButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "showSignUpSegue", sender: self)
     }
