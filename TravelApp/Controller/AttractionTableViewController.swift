@@ -152,7 +152,19 @@ class AttractionTableViewController: UITableViewController, UISearchResultsUpdat
         let attraction = searchController.isActive ? searchResults[indexPath.row] : attractions[indexPath.row]
         cell.attractionNameLabel.text = attraction.name
         cell.attractionLocationLabel.text = attraction.location
-        cell.attractionImageView.image = #imageLiteral(resourceName: "imagenotfound")
+        if attraction.img == nil {
+            if attraction.img_url.isEmpty == false {
+                attraction.downloadImage(url: attraction.img_url) { (imageData) in
+                    attraction.img = NSData(data: imageData) as Data
+                    cell.attractionImageView.image = UIImage(data: attraction.img!)
+                    tableView.reloadData()
+                }
+            } else {
+                cell.attractionImageView.image = #imageLiteral(resourceName: "imagenotfound")
+            }
+        } else {
+            cell.attractionImageView.image = UIImage(data: attraction.img!)
+        }
         
         return cell
     }

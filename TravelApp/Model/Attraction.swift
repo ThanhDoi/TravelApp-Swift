@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Alamofire
+import AlamofireImage
 
 class Attraction {
     
@@ -27,5 +29,16 @@ class Attraction {
         self.features = features
         self.img_url = img_url
         self.cityID = cityID
+    }
+    
+    func downloadImage(url: String, completion: @escaping (_ image: Data) -> Void) {
+        Alamofire.request(url, method: .get).responseImage { (response) in
+            guard let image = response.result.value else {
+                return
+            }
+            if let imageData = UIImagePNGRepresentation(image) {
+                completion(imageData)
+            }
+        }
     }
 }
